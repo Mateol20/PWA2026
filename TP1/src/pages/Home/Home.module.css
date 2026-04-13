@@ -3,11 +3,11 @@
     position:fixed ;
     bottom: 20px;
     right: 20px;
-    color: black;
     border: solid 0px rgb(135, 15, 79);
     border-radius: 30%;
     background-color: rgb(186, 6, 177);
 }
 .agregarPelicula:hover{
     filter: brightness(0.8);
+    color: black;
 }

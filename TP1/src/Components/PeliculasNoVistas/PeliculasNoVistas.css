@@ -1,0 +1,37 @@
+* { disbox-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+.container {
+  /* display: flex; */
+  justify-content: center;
+  padding: 50px; 
+}
+
+.tarjeta {
+  border: 2px solid rgb(0, 0, 0);
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 230px;
+}
+.dato {
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: center;
+}
+button {
+  margin: auto;
+  margin-top: 20px;
+  display: block;
+  background-color: rgb(186, 6, 177);
+  border: solid 1px black;
+  cursor: pointer;
+}
+button:hover{
+    filter: brightness(.8);
+    color: black;
+}
+#titulo{}
+#director{}
+#genero{}
+#tipo{}
+#anio{}
