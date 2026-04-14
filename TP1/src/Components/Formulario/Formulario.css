@@ -1,0 +1,31 @@
+* { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 50px; 
+}
+
+h2 { margin-top: 0; color: #333; text-align: center; }
+
+.tarjeta {
+  border: 2px solid rgb(0, 0, 0);
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 230px;
+}
+
+.input {
+  margin-bottom: 2px;
+}
+select{
+  width:70% ;
+  margin: auto; 
+  display: block;
+}
+button {
+  margin: auto;
+  margin-top: 20px;
+   display: block;
+}
