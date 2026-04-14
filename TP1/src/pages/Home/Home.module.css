@@ -1,13 +1,38 @@
-.agregarPelicula{
-    cursor: pointer;
-    position:fixed ;
-    bottom: 20px;
-    right: 20px;
-    color: black;
-    border: solid 0px rgb(135, 15, 79);
-    border-radius: 30%;
-    background-color: rgb(186, 6, 177);
+/* src/pages/Home/Home.module.css */
+
+.agregarPelicula {
+  /* Posicionamiento fijo para que no se mueva al scrollear */
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+
+  /* Tamaño y forma circular */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%; /* Esto lo hace redondo */
+
+  /* Estética */
+  background-color: #c026d3; /* Tu color rosa/fucsia */
+  color: white;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+
+  /* Sombra para que parezca que flota */
+  box-shadow: 0 4px 15px rgba(192, 38, 211, 0.4);
+
+  /* Centrado del signo + */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    transform 0.2s,
+    background-color 0.2s;
+  z-index: 3000; /* Siempre por encima del resto */
 }
-.agregarPelicula:hover{
-    filter: brightness(0.8);
+
+.agregarPelicula:hover {
+  transform: scale(1.1); /* Se agranda un poquito al pasar el mouse */
+  background-color: #5dd42d;
 }
