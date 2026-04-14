@@ -6,7 +6,7 @@ import Home from "./pages/Home/Home.jsx";
 function App() {
   return (
     <div className="App">
-      <nav>Navbar del sitio</nav>
+      <nav></nav>
 
       <Home />
     </div>
