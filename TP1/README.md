@@ -6,6 +6,13 @@
 
 # Ignacio Bonorino FAI 4863
 
+# Función de los siguientes archivos iniciales:
+
+index.js: Carga el main.jsx
+App.js: Se encarga de carga home.jsx, y elementos estaticos header y footer
+index.css:
+package.json: Se encarga de indicar los archivos necesarios para que el proyecto funcione.
+
 # Guia de de instalación paso a paso:
 
 1. Clonar el repositorio: en vscode abrir una consola y escribir el siguiente comando
@@ -21,8 +28,25 @@
 6. Prueba: Ejectuar el comando
    npm run dev Para asegurarse de que todo esta funcionando correctamente.
 
-   Función de los siguientes archivos iniciales:
-   index.js:
-   App.js
-   index.css
-   package.json.
+# PASOS DE GIT
+
+CREAR LA BRANCH
+git checkout -b nombre-de-tu-rama
+
+1. Mira en qué rama estás (debería ser la que creaste)
+
+git branch
+
+2.  Agrega los cambios
+
+git add .
+
+3.  Crea el "paquete" con un mensaje
+
+git commit -m "Agregado componente Titulo con estilos y renderizado en Home"
+
+4.  Subir la rama a GitHub
+
+git push origin NOMBRE_DE_TU_RAMA
+
+5. Crea el Pull Request en la web

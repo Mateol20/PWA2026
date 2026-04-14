@@ -1,0 +1,27 @@
+.grupo-botones {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.btn-filtro {
+  padding: 10px 20px;
+  border: 2px solid #646cff;
+  background-color: transparent;
+  color: #646cff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-filtro:hover {
+  background-color: #f0f0ff;
+}
+
+.btn-filtro.activo {
+  background-color: #646cff;
+  color: white;
+  box-shadow: 0 4px 10px rgba(100, 108, 255, 0.3);
+}

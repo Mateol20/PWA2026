@@ -1,6 +1,7 @@
 import { useState } from "react";
-import  Formulario  from "../../Components/Formulario/Formulario.jsx";
+import Formulario from "../../Components/Formulario/Formulario.jsx";
 import Titulo from "../../Components/Titulo/Titulo.jsx";
+import Filtro from "../../Components/Filtro/Filtro.jsx";
 import styles from"./Home.module.css";
 const Home = () => {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
@@ -9,6 +10,7 @@ const Home = () => {
     {mostrarFormulario && <Formulario/>}
     <section>
       <Titulo texto="Mi gestor de peliculas y series" />
+      <Filtro filtroActual={filtro} setFiltroActual={setFiltro} />
     </section>
     <div> 
 <button 
