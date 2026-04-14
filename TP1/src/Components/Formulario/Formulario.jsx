@@ -1,56 +1,109 @@
-import React from 'react'
-import './Formulario.css'
-const Formulario = () => {
-  return ( 
+import { useState } from "react";
+import "./Formulario.css";
+import Boton from "../Boton/Boton.jsx";
+import { guardarEnLocalStorage } from "../../utils/LocalStorage.js";
 
-<div className="container">
-  <form className="tarjeta">
-    <h2>Nueva Pelicula</h2>
-    
-    <div className="input">
-      <input type="text" id="titulo" placeholder="Titulo"/>
+const Formulario = ({ alCerrar }) => {
+  const [pelicula, setPelicula] = useState({
+    titulo: "",
+    director: "",
+    anio: "",
+    rating: "",
+    genero: "Seleccionar Genero",
+    tipo: "Pelicula",
+  });
+
+  const manejarCambio = (e) => {
+    const { id, value } = e.target;
+    setPelicula({ ...pelicula, [id]: value });
+  };
+
+  const manejarEnvio = (e) => {
+    e.preventDefault();
+
+    if (!pelicula.titulo) {
+      alert("Por favor ingresá el título");
+      return;
+    }
+
+    guardarEnLocalStorage("peliculas", pelicula);
+    alert("¡Película guardada con éxito!");
+    alCerrar();
+  };
+
+  return (
+    <div className="container">
+      <form className="tarjeta" onSubmit={manejarEnvio}>
+        <div className="contenedor-cerrar">
+          <Boton texto="×" onClick={alCerrar} tipo="peligro" />
+        </div>
+
+        <h2>Cargar Pelicula</h2>
+
+        <div className="input">
+          <input
+            type="text"
+            id="titulo"
+            placeholder="Titulo"
+            onChange={manejarCambio}
+            value={pelicula.titulo}
+          />
+        </div>
+
+        <div className="input">
+          <input
+            type="text"
+            id="director"
+            placeholder="Director"
+            onChange={manejarCambio}
+            value={pelicula.director}
+          />
+        </div>
+
+        <div className="input">
+          <input
+            type="text"
+            id="anio"
+            placeholder="Año"
+            onChange={manejarCambio}
+            value={pelicula.anio}
+          />
+        </div>
+
+        <div className="input">
+          <input
+            type="text"
+            id="rating"
+            placeholder="Rating"
+            onChange={manejarCambio}
+            value={pelicula.rating}
+          />
+        </div>
+
+        <div className="input">
+          <select id="genero" onChange={manejarCambio} value={pelicula.genero}>
+            <option disabled>Seleccionar Genero</option>
+            <option value="Comedia">Comedia</option>
+            <option value="Romance">Romance</option>
+            <option value="Terror">Terror</option>
+            <option value="Infantil">Infantil</option>
+            <option value="Anime">Anime</option>
+            <option value="Suspenso">Suspenso</option>
+            <option value="Accion">Accion</option>
+          </select>
+        </div>
+
+        <div className="input">
+          <select id="tipo" onChange={manejarCambio} value={pelicula.tipo}>
+            <option value="Pelicula">Pelicula</option>
+            <option value="Serie">Serie</option>
+          </select>
+        </div>
+
+        <Boton texto="Cargar Película" tipo="primario" type="submit" />
+      </form>
     </div>
+  );
+};
 
-
-    <div className="input">
-      <input type="text" id="director" placeholder="Director"/>
-    </div>
-    
-
-    <div className="input">
-      <input type="text" id="anio" placeholder="Año"/>
-    </div>
-    
-    <div className="input">
-      <input type="text" id="rating" placeholder="Rating"/>
-    </div>
-
-    <div className="input">
-        <select>
-        <option>Seleccionar Genero</option>
-        <option>Comedia</option>
-        <option>Romance</option>
-        <option>Terror</option>
-        <option>Infantil</option>
-        <option>Anime</option>
-        <option>Suspenso</option>
-        <option>Accion</option>
-      </select>
-    </div>
-
-
-    <div className="input">
-      <select>
-        <option>Pelicula</option>
-        <option>Serie</option>
-      </select>
-    </div>
-
-    <button type="submit">Cargar</button>
-  
-  </form>
-</div>
-
-)
-}
 export default Formulario;

@@ -1,0 +1,32 @@
+.btn-general {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.primario {
+  background-color: #646cff;
+  color: white;
+}
+
+.primario:hover {
+  background-color: #535bf2;
+}
+
+.peligro {
+  background-color: #ff4747;
+  color: white;
+}
+
+.fantasma {
+  background-color: transparent;
+  border: 2px solid #646cff;
+  color: #646cff;
+}
