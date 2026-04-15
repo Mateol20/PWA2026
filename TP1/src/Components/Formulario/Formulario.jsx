@@ -1,31 +1,56 @@
-import React from 'react'
+import React, { useState } from 'react'
+// import React, { component } from 'react'
+import {FormEvent} from 'react'
 import './Formulario.css'
-const Formulario = () => {
-  return ( 
 
+const Formulario = () => {
+  const [datoUno, setDatos] = useState({
+    titulo: '',
+    director: ''
+  })
+
+  const handleChange = (e) => {
+    const {name, value } = e.target;
+    console.log(name, value);
+    setDatos({[name] : value})
+    console.log({datoUno})
+
+  };
+
+
+  // console.log(name, value);
+  return ( 
 <div className="container">
-  <form className="tarjeta">
+  <form className="tarjeta"
+  //  onSubmit={ev=>{  ev.preventDefault;
+
+  //   const titulo = ev.target.titulo.value;
+  //   const director = ev.target.director.value;
+
+  //   console.log(titulo,director)
+  // }}
+  >
     <h2>Nueva Pelicula</h2>
     
     <div className="input">
-      <input type="text" id="titulo" placeholder="Titulo"/>
+      <input type="text" name="titulo" id="titulo" placeholder="Titulo" onChange={handleChange} />
     </div>
 
 
     <div className="input">
-      <input type="text" id="director" placeholder="Director"/>
-    </div>
-    
-
-    <div className="input">
-      <input type="text" id="anio" placeholder="Año"/>
+      <input type="text" name="director" id="director" placeholder="Director" onChange={handleChange}/>
     </div>
     
-    <div className="input">
-      <input type="text" id="rating" placeholder="Rating"/>
-    </div>
 
     <div className="input">
+      <input type="text" name="anio" id="anio" placeholder="Año" onChange={handleChange} />
+    </div>
+    
+    <div className="input">
+      <input type="text" name="rating" id="rating" placeholder="Rating" onChange={handleChange} />
+    </div>
+
+    <div className="input" name="genero" onChange={handleChange} >
         <select>
         <option>Seleccionar Genero</option>
         <option>Comedia</option>
@@ -39,7 +64,7 @@ const Formulario = () => {
     </div>
 
 
-    <div className="input">
+    <div className="input" name="tipo" onChange={handleChange} >
       <select>
         <option>Pelicula</option>
         <option>Serie</option>
@@ -49,8 +74,8 @@ const Formulario = () => {
     <button type="submit">Cargar</button>
   
   </form>
+  {/* {alert(2)} */}
 </div>
-
 )
 }
 export default Formulario;
