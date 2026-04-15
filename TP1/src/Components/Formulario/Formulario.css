@@ -1,16 +1,14 @@
-/* src/Components/Formulario/Formulario.css */
-
 .container {
-  position: fixed; /* Lo saca del flujo y lo deja fijo en pantalla */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro transparente */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 5000; /* Asegura que esté por encima de todo */
+  z-index: 5000;
 }
 
 .tarjeta {
@@ -28,12 +26,11 @@
   color: #1a1a1a;
 }
 
-/* Estilizamos todos los inputs y el select por igual */
 input,
 select {
-  width: 100%; /* Que ocupen todo el ancho de la tarjeta */
+  width: 100%;
   padding: 10px;
-  margin-bottom: 15px; /* Espacio entre campos */
+  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 8px;
   outline: none;
@@ -42,11 +39,11 @@ select {
 
 input:focus,
 select:focus {
-  border-color: #646cff; /* Color azul cuando haces clic */
+  border-color: #646cff;
 }
 
 button {
-  width: 100%; /* Botón ancho para que sea fácil de clickear */
+  width: 100%;
   padding: 12px;
   background-color: #646cff;
   color: white;
@@ -69,11 +66,11 @@ button:hover {
   font-size: 1.5rem;
   cursor: pointer;
   color: #888;
-  width: auto; /* Para que no herede el 100% que pusimos antes */
+  width: auto;
   padding: 5px;
 }
 
 .btn-cerrar-modal:hover {
   color: #333;
-  background: none; /* Quitamos el fondo azul del hover general */
+  background: none;
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Formulario.css";
 import Boton from "../Boton/Boton.jsx";
 import { guardarEnLocalStorage } from "../../utils/LocalStorage.js";
+import InputComponent from "../InputComponent/InputComponent.jsx";
 
 const Formulario = ({ alCerrar }) => {
   const [pelicula, setPelicula] = useState({
@@ -39,7 +40,7 @@ const Formulario = ({ alCerrar }) => {
         </div>
 
         <h2>Cargar Pelicula</h2>
-
+        <InputComponent texto="titulo" rating="2" />
         <div className="input">
           <input
             type="text"
