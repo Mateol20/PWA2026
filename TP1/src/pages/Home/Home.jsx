@@ -7,27 +7,30 @@ import { PeliculasNoVistas } from "../../Components/PeliculasNoVistas/PeliculasN
 const Home = () => {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [filtro, setFiltro] = useState("todas");
+
   return (
-    <>
-      {mostrarFormulario && (
-        <Formulario alCerrar={() => setMostrarFormulario(false)} />
-      )}
+    <div className={styles.homeContainer}> {/* Un contenedor padre para controlar el flujo */}
       <section>
         <Titulo texto="Mi gestor de peliculas y series" />
         <Filtro filtroActual={filtro} setFiltroActual={setFiltro} />
       </section>
-      <PeliculasNoVistas/>
-      <div>
-        <button
-          className={styles.agregarPelicula}
-          onClick={() => setMostrarFormulario(!mostrarFormulario)}
-        >
-          {mostrarFormulario ? "Cerrar" : "+"}
-        </button>
 
-        {/* <button className= {styles.agregarPelicula} > + </button> */}
-      </div>
-    </>
+      {/* El formulario aparece arriba o abajo, pero NO debe tener position: fixed */}
+      {mostrarFormulario && (
+        <Formulario alCerrar={() => setMostrarFormulario(false)} />
+      )}
+
+   <main className={styles.contenedorPrincipal}>
+  <PeliculasNoVistas />
+</main>
+
+      <button
+        className={styles.agregarPelicula}
+        onClick={() => setMostrarFormulario(!mostrarFormulario)}
+      >
+        {mostrarFormulario ? "×" : "+"}
+      </button>
+    </div>
   );
 };
 

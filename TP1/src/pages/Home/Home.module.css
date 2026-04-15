@@ -5,7 +5,7 @@
   position: fixed;
   bottom: 30px;
   right: 30px;
-
+z-index: 100;
   /* Tamaño y forma circular */
   width: 60px;
   height: 60px;
@@ -35,4 +35,23 @@
 .agregarPelicula:hover {
   transform: scale(1.1); /* Se agranda un poquito al pasar el mouse */
   background-color: #5dd42d;
+}
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra todo el contenido horizontalmente */
+  min-height: 100vh;
+  width: 100%;
+  padding: 20px;
+}
+
+.contenedorPrincipal {
+  width: 100%;
+  margin-top: 20px;
+  display: block; /* Que ocupe su lugar debajo de los filtros */
+  position: relative;
+}
+section {
+  position: relative;
+  z-index: 10; /* Un z-index mayor que el del contenedor de películas */
 }

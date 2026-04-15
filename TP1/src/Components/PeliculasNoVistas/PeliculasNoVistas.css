@@ -1,37 +1,37 @@
-* { disbox-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-
+/* Este es el contenedor de TODAS las tarjetas */
 .container {
   display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
-  padding: 50px; 
+  padding: 40px 20px;
+  width: 100%;
+  
+  /* ESTO ES LO MÁS IMPORTANTE: */
+  position: relative; /* Cambiá cualquier 'fixed' o 'absolute' por esto */
+  z-index: 1;         /* Un valor bajo para que no tape los botones */
+  height: auto;       /* Que el alto lo den las tarjetas, no la pantalla */
+  background: none;   /* Por si quedó algún color residual */
+}
+/* Esta es la tarjeta INDIVIDUAL */
+.tarjeta {
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  padding: 24px;
+  width: 250px;
+  
+  /* Reset de posición */
+  position: relative; 
+  transform: none; /* Si tenías un transform: translate, borralo */
+  
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-.tarjeta {
-  border: 2px solid rgb(0, 0, 0);
-  padding: 30px;
-  border-radius: 12px;
-  width: 100%;
-  max-width: 230px;
-}
 .dato {
-  margin-bottom: 2px;
-  display: flex;
-  justify-content: center;
+  color: white;
+  margin-bottom: 8px;
+  display: block; /* Para que cada dato sea una línea nueva */
+  text-align: left;
 }
-button {
-  margin: auto;
-  margin-top: 20px;
-  display: block;
-  background-color: rgb(186, 6, 177);
-  border: solid 1px black;
-  cursor: pointer;
-}
-button:hover{
-    filter: brightness(.8);
-    color: black;
-}
-#titulo{}
-#director{}
-#genero{}
-#tipo{}
-#anio{}

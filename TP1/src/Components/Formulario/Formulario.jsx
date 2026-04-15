@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState } from "react"; 
 import "./Formulario.css";
-import Boton from "../Boton/Boton.jsx";
+import Boton from "../Boton/Boton.jsx"; // <--- VERIFICÁ QUE ESTA RUTA SEA CORRECTA
 import { guardarEnLocalStorage } from "../../utils/LocalStorage.js";
 import InputComponent from "../InputComponent/InputComponent.jsx";
-
 const Formulario = ({ alCerrar }) => {
   const [pelicula, setPelicula] = useState({
     titulo: "",
@@ -21,67 +20,52 @@ const Formulario = ({ alCerrar }) => {
 
   const manejarEnvio = (e) => {
     e.preventDefault();
-
     if (!pelicula.titulo) {
       alert("Por favor ingresá el título");
       return;
     }
-
     guardarEnLocalStorage("peliculas", pelicula);
     alert("¡Película guardada con éxito!");
     alCerrar();
   };
 
   return (
-    <div className="container">
-      <form className="tarjeta" onSubmit={manejarEnvio}>
+    /* Clase cambiada a "modal-overlay" para que flote */
+    <div className="modal-container-fixed"> 
+      <form className="modal-card-flotante" onSubmit={manejarEnvio}>
         <div className="contenedor-cerrar">
           <Boton texto="×" onClick={alCerrar} tipo="peligro" />
         </div>
 
         <h2>Cargar Pelicula</h2>
-        <InputComponent texto="titulo" rating="2" />
-        <div className="input">
-          <input
-            type="text"
-            id="titulo"
-            placeholder="Titulo"
-            onChange={manejarCambio}
-            value={pelicula.titulo}
-          />
-        </div>
 
-        <div className="input">
-          <input
-            type="text"
-            id="director"
-            placeholder="Director"
-            onChange={manejarCambio}
-            value={pelicula.director}
-          />
-        </div>
+        {/* Uso correcto de tu InputComponent */}
+       <InputComponent 
+  id="titulo" 
+  placeholder="Título" 
+  onChange={manejarCambio} // <--- CAMBIADO: onchange -> onChange
+  value={pelicula.titulo} 
+/>
+<InputComponent 
+  id="director" 
+  placeholder="Director" 
+  onChange={manejarCambio} // <--- CAMBIADO: onchange -> onChange
+  value={pelicula.director} 
+/>
+<InputComponent 
+  id="anio" 
+  placeholder="Año" 
+  onChange={manejarCambio} // <--- CAMBIADO: onchange -> onChange
+  value={pelicula.anio} 
+/>
+<InputComponent 
+  id="rating" 
+  placeholder="Rating" 
+  onChange={manejarCambio} // <--- CAMBIADO: onchange -> onChange
+  value={pelicula.rating} 
+/>
 
-        <div className="input">
-          <input
-            type="text"
-            id="anio"
-            placeholder="Año"
-            onChange={manejarCambio}
-            value={pelicula.anio}
-          />
-        </div>
-
-        <div className="input">
-          <input
-            type="text"
-            id="rating"
-            placeholder="Rating"
-            onChange={manejarCambio}
-            value={pelicula.rating}
-          />
-        </div>
-
-        <div className="input">
+        <div className="input-select">
           <select id="genero" onChange={manejarCambio} value={pelicula.genero}>
             <option disabled>Seleccionar Genero</option>
             <option value="Comedia">Comedia</option>
@@ -94,7 +78,7 @@ const Formulario = ({ alCerrar }) => {
           </select>
         </div>
 
-        <div className="input">
+        <div className="input-select">
           <select id="tipo" onChange={manejarCambio} value={pelicula.tipo}>
             <option value="Pelicula">Pelicula</option>
             <option value="Serie">Serie</option>
@@ -106,5 +90,4 @@ const Formulario = ({ alCerrar }) => {
     </div>
   );
 };
-
-export default Formulario;
+export default Formulario

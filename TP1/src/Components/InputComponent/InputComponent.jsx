@@ -1,8 +1,14 @@
-const InputComponent = ({ text, rating }) => {
+const InputComponent = ({ id, placeholder, onChange, value }) => {
   return (
-    <>
-      <input type={text}></input>
-    </>
+    <div className="input">
+      <input
+        type="text"
+        id={id}
+        placeholder={placeholder}
+        value={value} // El valor viene del estado de Formulario
+        onChange={onChange} // <--- ESTO ES LO QUE PERMITE ESCRIBIR
+      />
+    </div>
   );
 };
 

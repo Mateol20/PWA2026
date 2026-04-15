@@ -10,26 +10,24 @@ export const PeliculasNoVistas = () => {
     return peliculaStorage
   }
 
-  const pelisTotal = conseguirPelis()
-  
-  return (
-    <>
-{pelisTotal.map(peli=>{
-  return( 
-    <div id="container" className="container">
-  <div id="tarjeta" className="tarjeta">
-            <label id="titulo" className='dato' > {peli.titulo} </label>
-            <label id="anio" className='dato'> {peli.anio}  </label>
-            <label id='director' className='dato'> {peli.director}  </label>
-            <label id='genero' className='dato'> {peli.genero}  </label>
-            <label id='tipo' className='dato'> {peli.tipo}  </label>
-            <button id='boton'>Marcar como vista</button>
-            </div>
-            </div>
-            )
-})}
-    </>
-  )
+ const pelisTotal = conseguirPelis();
+
+return (
+  <div className="container"> {/* EL CONTENEDOR VA AFUERA */}
+    {pelisTotal && pelisTotal.map((peli, index) => {
+      return (
+        <div key={index} className="tarjeta"> {/* SOLO LA TARJETA VA ADENTRO */}
+          <label className='dato'>{peli.titulo}</label>
+          <label className='dato'>{peli.anio}</label>
+          <label className='dato'>{peli.director}</label>
+          <label className='dato'>{peli.genero}</label>
+          <label className='dato'>{peli.tipo}</label>
+          <button className='boton'>Marcar como vista</button>
+        </div>
+      );
+    })}
+  </div>
+);
  
 }
 // tipo, genero, año, director, titulo boton para marcar como vista
