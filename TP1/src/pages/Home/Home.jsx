@@ -5,6 +5,7 @@ import Filtro from "../../Components/Filtro/Filtro.jsx";
 import styles from "./Home.module.css";
 import { PeliculasNoVistas } from "../../Components/PeliculasNoVistas/PeliculasNoVistas.jsx";
 import BarraBusqueda from "../../Components/BarraBusqueda/BarraBusqueda.jsx";
+import { PeliculasVistas } from "../../Components/Formulario/PeliculasVistas/PeliculasVistas.jsx";
 const Home = () => {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [filtro, setFiltro] = useState("todas");
@@ -22,8 +23,15 @@ const Home = () => {
       )}
 
       <main className={styles.contenedorPrincipal}>
-        <PeliculasNoVistas filtroBusqueda={busqueda} />
+        {/* {filtro == "pendientes" ?  <PeliculasNoVistas/> : console.log("no")} */}
+          <PeliculasNoVistas filtroBusqueda={busqueda} estado={filtro} />
+        {/* {filtro == "vistas" ?  <PeliculasVistas filtroBusqueda={busqueda} estado={setFiltro} /> : console.log("no entro") } */}
+    
       </main>
+      {/* <main className={styles.contenedorPrincipal}>
+        <PeliculasNoVistas filtroBusqueda={busqueda} />
+      </main> */}
+
 
       <button
         className={styles.agregarPelicula}
