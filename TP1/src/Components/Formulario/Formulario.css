@@ -1,79 +1,65 @@
-/* src/Components/Formulario/Formulario.css */
-
-.container {
-  position: fixed; /* Lo saca del flujo y lo deja fijo en pantalla */
+.modal-container-fixed {
+  position: fixed !important;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro transparente */
+  z-index: 99999;
+  background-color: rgba(16, 42, 67, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 5000; /* Asegura que esté por encima de todo */
+  backdrop-filter: blur(4px);
 }
 
-.tarjeta {
-  background-color: white;
-  padding: 30px;
-  border-radius: 15px;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+.modal-card-flotante {
+  background-color: #ffffff;
+  padding: 35px;
+  border-radius: 20px;
+  width: 380px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 1px solid #e1e8ed;
 }
 
-.tarjeta h2 {
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-  color: #1a1a1a;
+.modal-card-flotante h2 {
+  color: #102a43;
+  margin-bottom: 10px;
+  text-align: center;
+  font-family: sans-serif;
 }
 
-/* Estilizamos todos los inputs y el select por igual */
-input,
-select {
-  width: 100%; /* Que ocupen todo el ancho de la tarjeta */
-  padding: 10px;
-  margin-bottom: 15px; /* Espacio entre campos */
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  outline: none;
-  transition: border-color 0.3s;
+.modal-card-flotante .input {
+  width: 100%;
 }
 
-input:focus,
-select:focus {
-  border-color: #646cff; /* Color azul cuando haces clic */
-}
-
-button {
-  width: 100%; /* Botón ancho para que sea fácil de clickear */
+.modal-card-flotante input,
+.modal-card-flotante select {
+  width: 100%;
   padding: 12px;
-  background-color: #646cff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s;
+  border-radius: 10px;
+  border: 2px solid #f0f4f8;
+  background-color: #f0f4f8;
+  color: #334e68;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
 }
 
-button:hover {
-  background-color: #535bf2;
-}
-.btn-cerrar-modal {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #888;
-  width: auto; /* Para que no herede el 100% que pusimos antes */
-  padding: 5px;
+.modal-card-flotante input:focus,
+.modal-card-flotante select:focus {
+  border-color: #48bb78;
+  background-color: #ffffff;
 }
 
-.btn-cerrar-modal:hover {
-  color: #333;
-  background: none; /* Quitamos el fondo azul del hover general */
+.modal-card-flotante .input-select {
+  width: 100%;
+}
+
+.contenedor-cerrar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: -20px;
 }
