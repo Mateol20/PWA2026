@@ -1,4 +1,4 @@
-import { useState } from "react"; 
+import { useState } from "react";
 import "./Formulario.css";
 import Boton from "../Boton/Boton.jsx"; // <--- VERIFICÁ QUE ESTA RUTA SEA CORRECTA
 import { guardarEnLocalStorage } from "../../utils/LocalStorage.js";
@@ -30,8 +30,7 @@ const Formulario = ({ alCerrar }) => {
   };
 
   return (
-    /* Clase cambiada a "modal-overlay" para que flote */
-    <div className="modal-container-fixed"> 
+    <div className="modal-container-fixed">
       <form className="modal-card-flotante" onSubmit={manejarEnvio}>
         <div className="contenedor-cerrar">
           <Boton texto="×" onClick={alCerrar} tipo="peligro" />
@@ -39,31 +38,30 @@ const Formulario = ({ alCerrar }) => {
 
         <h2>Cargar Pelicula</h2>
 
-        {/* Uso correcto de tu InputComponent */}
-       <InputComponent 
-  id="titulo" 
-  placeholder="Título" 
-  onChange={manejarCambio} // <--- CAMBIADO: onchange -> onChange
-  value={pelicula.titulo} 
-/>
-<InputComponent 
-  id="director" 
-  placeholder="Director" 
-  onChange={manejarCambio} // <--- CAMBIADO: onchange -> onChange
-  value={pelicula.director} 
-/>
-<InputComponent 
-  id="anio" 
-  placeholder="Año" 
-  onChange={manejarCambio} // <--- CAMBIADO: onchange -> onChange
-  value={pelicula.anio} 
-/>
-<InputComponent 
-  id="rating" 
-  placeholder="Rating" 
-  onChange={manejarCambio} // <--- CAMBIADO: onchange -> onChange
-  value={pelicula.rating} 
-/>
+        <InputComponent
+          id="titulo"
+          placeholder="Título"
+          onChange={manejarCambio}
+          value={pelicula.titulo}
+        />
+        <InputComponent
+          id="director"
+          placeholder="Director"
+          onChange={manejarCambio}
+          value={pelicula.director}
+        />
+        <InputComponent
+          id="anio"
+          placeholder="Año"
+          onChange={manejarCambio}
+          value={pelicula.anio}
+        />
+        <InputComponent
+          id="rating"
+          placeholder="Rating"
+          onChange={manejarCambio}
+          value={pelicula.rating}
+        />
 
         <div className="input-select">
           <select id="genero" onChange={manejarCambio} value={pelicula.genero}>
@@ -90,4 +88,4 @@ const Formulario = ({ alCerrar }) => {
     </div>
   );
 };
-export default Formulario
+export default Formulario;

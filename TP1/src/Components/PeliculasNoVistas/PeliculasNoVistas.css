@@ -1,37 +1,62 @@
-/* Este es el contenedor de TODAS las tarjetas */
 .container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 25px;
   justify-content: center;
   padding: 40px 20px;
   width: 100%;
-  
-  /* ESTO ES LO MÁS IMPORTANTE: */
-  position: relative; /* Cambiá cualquier 'fixed' o 'absolute' por esto */
-  z-index: 1;         /* Un valor bajo para que no tape los botones */
-  height: auto;       /* Que el alto lo den las tarjetas, no la pantalla */
-  background: none;   /* Por si quedó algún color residual */
+  position: relative;
+  z-index: 1;
+  height: auto;
+  background-color: #f0f4f8;
 }
-/* Esta es la tarjeta INDIVIDUAL */
+
 .tarjeta {
-  background-color: #1a1a1a;
-  border-radius: 12px;
+  background-color: #ffffff;
+  border-radius: 16px;
   padding: 24px;
-  width: 250px;
-  
-  /* Reset de posición */
-  position: relative; 
-  transform: none; /* Si tenías un transform: translate, borralo */
-  
+  width: 280px;
+  position: relative;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e1e8ed;
+  transition: transform 0.2s ease;
+}
+
+.tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .dato {
-  color: white;
-  margin-bottom: 8px;
-  display: block; /* Para que cada dato sea una línea nueva */
+  color: #334e68;
+  margin-bottom: 10px;
+  display: block;
   text-align: left;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.dato:first-child {
+  font-size: 18px;
+  font-weight: 700;
+  color: #102a43;
+  margin-bottom: 12px;
+}
+
+button {
+  background-color: #48bb78;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #38a169;
 }
