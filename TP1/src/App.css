@@ -1,3 +1,10 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #eaefef; /* Un gris azulado muy suave */
+
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 .counter {
   font-size: 16px;
   padding: 5px 10px;
@@ -167,7 +174,7 @@
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -4.5px;
     border: 5px solid transparent;
