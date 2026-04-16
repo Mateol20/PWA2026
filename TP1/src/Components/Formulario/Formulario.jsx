@@ -11,6 +11,7 @@ const Formulario = ({ alCerrar }) => {
     rating: "",
     genero: "Seleccionar Genero",
     tipo: "Pelicula",
+
   });
 
   const manejarCambio = (e) => {
