@@ -1,16 +1,7 @@
-import React from "react";
 import "./PeliculasNoVistas.css";
-import Formulario from "../Formulario/Formulario";
-
-export const PeliculasNoVistas = ({ filtroBusqueda }) => {
-  const conseguirPelis = () => {
-    const peliculaStorage = JSON.parse(localStorage.getItem("peliculas"));
-    return peliculaStorage;
-  };
-
-  const pelisTotal = conseguirPelis();
+const PeliculasNoVistas = ({ filtroBusqueda, datosPeliculas }) => {
   const busquedaSegura = filtroBusqueda || "";
-  const peliculasFiltradas = pelisTotal.filter((peli) => {
+  const peliculasFiltradas = (datosPeliculas || []).filter((peli) => {
     const tituloPeli = peli.titulo ? peli.titulo.toLowerCase() : "";
     const textoABuscar = busquedaSegura.toLowerCase();
     return tituloPeli.includes(textoABuscar);
@@ -36,3 +27,4 @@ export const PeliculasNoVistas = ({ filtroBusqueda }) => {
     </div>
   );
 };
+export default PeliculasNoVistas;

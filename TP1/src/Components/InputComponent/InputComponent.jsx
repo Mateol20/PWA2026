@@ -5,8 +5,8 @@ const InputComponent = ({ id, placeholder, onChange, value }) => {
         type="text"
         id={id}
         placeholder={placeholder}
-        value={value} // El valor viene del estado de Formulario
-        onChange={onChange} // <--- ESTO ES LO QUE PERMITE ESCRIBIR
+        value={value}
+        onChange={onChange}
       />
     </div>
   );
