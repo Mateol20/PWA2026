@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Formulario.css";
-import Boton from "../Boton/Boton.jsx"; // <--- VERIFICÁ QUE ESTA RUTA SEA CORRECTA
+import Boton from "../Boton/Boton.jsx";
 import { guardarEnLocalStorage } from "../../utils/LocalStorage.js";
 import InputComponent from "../InputComponent/InputComponent.jsx";
 const Formulario = ({ alCerrar }) => {
@@ -11,6 +11,7 @@ const Formulario = ({ alCerrar }) => {
     rating: "",
     genero: "Seleccionar Genero",
     tipo: "Pelicula",
+    vista: false,
   });
 
   const manejarCambio = (e) => {

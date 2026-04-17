@@ -1,4 +1,3 @@
-// src/components/Filtros.jsx
 import "./Filtro.css";
 
 const Filtro = ({ filtroActual, setFiltroActual }) => {

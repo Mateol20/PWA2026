@@ -1,33 +1,66 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Formulario from "../../Components/Formulario/Formulario.jsx";
 import Titulo from "../../Components/Titulo/Titulo.jsx";
 import Filtro from "../../Components/Filtro/Filtro.jsx";
 import styles from "./Home.module.css";
-import PeliculasNoVistas from "../../Components/PeliculasNoVistas/PeliculasNoVistas.jsx";
+import ListaPeliculas from "../../Components/PeliculasNoVistas/ListaPeliculas.jsx";
 import BarraBusqueda from "../../Components/BarraBusqueda/BarraBusqueda.jsx";
 import ResumenGeneros from "../../ResumenGeneros/ResumenGeneros.jsx";
+import FiltroGeneros from "../../Components/FiltroGeneros/FiltroGeneros.jsx";
+import { datosTest } from "../../test/test.js";
+
 const Home = () => {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [filtro, setFiltro] = useState("todas");
   const [busqueda, setBusqueda] = useState("");
-  const conseguirPelis = () => {
-    const peliculaStorage = JSON.parse(localStorage.getItem("peliculas"));
-    return peliculaStorage || [];
+  const [pelisTotal, setPelisTotal] = useState([]);
+  const [update, setUpdate] = useState(0);
+  const [generoFiltro, setGeneroFiltro] = useState("Todos");
+
+  useEffect(() => {
+    const peliculaStorage = JSON.parse(localStorage.getItem("peliculas")) || [];
+    if (peliculaStorage.length === 0) {
+      localStorage.setItem("peliculas", JSON.stringify(datosTest));
+      setPelisTotal(datosTest);
+    } else {
+      setPelisTotal(peliculaStorage);
+    }
+  }, [update, mostrarFormulario]);
+
+  const marcarComoVista = (titulo) => {
+    const pelis = JSON.parse(localStorage.getItem("peliculas")) || [];
+    const nuevasPelis = pelis.map((peli) => {
+      if (peli.titulo === titulo) {
+        return { ...peli, vista: true };
+      }
+      return peli;
+    });
+
+    localStorage.setItem("peliculas", JSON.stringify(nuevasPelis));
+    setUpdate((prev) => prev + 1);
   };
 
-  const pelisTotal = conseguirPelis();
   return (
     <div className={styles.homeContainer}>
       <Titulo texto="Mi gestor de peliculas y series" />
-      <Filtro filtroActual={"todas"} setFiltroActual={""} />
+
+      <Filtro filtroActual={filtro} setFiltroActual={setFiltro} />
+
       <BarraBusqueda busqueda={busqueda} setBusqueda={setBusqueda} />
 
       <ResumenGeneros peliculas={pelisTotal} />
-
+      <FiltroGeneros
+        generoSeleccionado={generoFiltro}
+        setGeneroActual={setGeneroFiltro}
+        peliculas={pelisTotal}
+      />
       <main className={styles.contenedorPrincipal}>
-        <PeliculasNoVistas
+        <ListaPeliculas
           filtroBusqueda={busqueda}
           datosPeliculas={pelisTotal}
+          filtroEstado={filtro}
+          filtroGenero={generoFiltro}
+          onMarcarVista={marcarComoVista}
         />
       </main>
 
@@ -37,6 +70,7 @@ const Home = () => {
       >
         {mostrarFormulario ? "×" : "+"}
       </button>
+
       {mostrarFormulario && (
         <Formulario alCerrar={() => setMostrarFormulario(false)} />
       )}
