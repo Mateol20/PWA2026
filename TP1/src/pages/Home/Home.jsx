@@ -18,14 +18,21 @@ const Home = () => {
   const [generoFiltro, setGeneroFiltro] = useState("Todos");
 
   useEffect(() => {
-    const peliculaStorage = JSON.parse(localStorage.getItem("peliculas")) || [];
-    if (peliculaStorage.length === 0) {
-      localStorage.setItem("peliculas", JSON.stringify(datosTest));
-      setPelisTotal(datosTest);
-    } else {
-      setPelisTotal(peliculaStorage);
-    }
-  }, [update, mostrarFormulario]);
+    const fetchAnimes = async () => {
+      try {
+        // Traemos los animes populares
+        const response = await fetch("https://api.jikan.moe/v4/top/anime");
+        const json = await response.json();
+
+        // Jikan devuelve los datos en la propiedad 'data'
+        setPelisTotal(json.data);
+      } catch (error) {
+        console.error("Error cargando animes:", error);
+      }
+    };
+
+    fetchAnimes();
+  }, []); // Se ejecuta una vez al montar el componente
 
   const marcarComoVista = (titulo) => {
     const pelis = JSON.parse(localStorage.getItem("peliculas")) || [];

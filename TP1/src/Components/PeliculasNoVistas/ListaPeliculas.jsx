@@ -1,64 +1,65 @@
-import "./ListaPeliculas.css";
-
+import "./ListaPeliculas.css"; // Recuerda renombrar tu CSS o mantener el anterior
 const ListaPeliculas = ({
   filtroBusqueda,
-  datosPeliculas,
+  datosPeliculas, // <--- CAMBIA ESTO (estaba como datosAnimes)
   filtroEstado,
   filtroGenero,
   onMarcarVista,
 }) => {
   const busquedaSegura = filtroBusqueda || "";
 
-  const peliculasFiltradas = (datosPeliculas || []).filter((peli) => {
-    const tituloPeli = peli.titulo ? peli.titulo.toLowerCase() : "";
-    const coincideTexto = tituloPeli.includes(busquedaSegura.toLowerCase());
-    let coincideFiltro = true;
-    if (filtroEstado === "vistas") {
-      coincideFiltro = peli.vista === true;
-    } else if (filtroEstado === "pendientes") {
-      coincideFiltro = peli.vista === false || !peli.vista;
-    }
-    const coincideGenero =
-      !filtroGenero || filtroGenero === "Todos" || peli.genero === filtroGenero;
-    return coincideTexto && coincideFiltro && coincideGenero;
-  });
+  // Ahora asegúrate de usar datosPeliculas aquí también
+  const animesFiltrados = (datosPeliculas || []).filter((anime) => {
+    // ... tu lógica de filtrado ...
+    const tituloAnime = anime.title ? anime.title.toLowerCase() : "";
+    const coincideTexto = tituloAnime.includes(busquedaSegura.toLowerCase());
 
+    const coincideGenero =
+      !filtroGenero ||
+      filtroGenero === "Todos" ||
+      (anime.genres && anime.genres.some((g) => g.name === filtroGenero));
+
+    return coincideTexto && coincideGenero;
+  });
   return (
     <div className="container">
-      {peliculasFiltradas.length > 0 ? (
-        peliculasFiltradas.map((peli, index) => (
-          <div key={index} className="tarjeta">
-            <h3 className="titulo-peli">{peli.titulo}</h3>
+      {animesFiltrados.length > 0 ? (
+        animesFiltrados.map((anime) => (
+          <div key={anime.mal_id} className="tarjeta">
+            {/* Imagen del Anime (Nuevo) */}
+            <img
+              src={anime.images.jpg.image_url}
+              alt={anime.title}
+              className="imagen-anime"
+            />
+
+            <h3 className="titulo-peli">{anime.title}</h3>
 
             <div className="info-grupo">
               <p>
-                <strong>Rating:</strong> ⭐ {peli.rating || "N/A"}
+                <strong>Rating:</strong> ⭐ {anime.score || "N/A"}
               </p>
               <p>
-                <strong>Año:</strong> {peli.anio}
+                <strong>Año:</strong>{" "}
+                {anime.year || anime.aired?.prop?.from?.year || "N/A"}
               </p>
               <p>
-                <strong>Director:</strong> {peli.director}
+                <strong>Episodios:</strong> {anime.episodes || "En emisión"}
               </p>
               <p>
-                <strong>Género:</strong> {peli.genero}
-              </p>
-              <p>
-                <strong>Formato:</strong> {peli.tipo}
+                <strong>Tipo:</strong> {anime.type}
               </p>
             </div>
 
-            <button
-              className={peli.vista ? "boton vista" : "boton"}
-              onClick={() => onMarcarVista(peli.titulo)}
-            >
-              {peli.vista ? "✓ Vista" : "Marcar como vista"}
+            {/* Botón adaptado a Favoritos */}
+            <button className="boton" onClick={() => onAgregarFavorito(anime)}>
+              ❤️ Añadir a Favoritos
             </button>
           </div>
         ))
       ) : (
         <p style={{ color: "#334e68", textAlign: "center", width: "100%" }}>
-          No se encontraron películas...
+          No se encontraron animes...
         </p>
       )}
     </div>
