@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "./Home.module.css";
 import { getAllMovies } from "../../../services/getAllMovies";
+import TarjetaPelicula from "../../Components/TarjetaPelicula/TarjetaPelicula";
 
 const Home = () => {
   const [todasLasPelis, setTodasLasPelis] = useState([]);
@@ -29,24 +30,22 @@ const Home = () => {
   };
 
   return (
-    <main>
-      <h1>Cartelera</h1>
-
-      {loading && <p>Cargando catálogo...</p>}
-
-      <section className={styles.grid}>
-        {peliculasVisibles.map((item) => (
-          <article key={item.imdbID}>
-            <h2>{item.Title}</h2>
-          </article>
-        ))}
-      </section>
-
-      {peliculasVisibles.length < todasLasPelis.length && (
-        <button onClick={cargarMas} className={styles.btnCargar}>
-          Cargar más
-        </button>
-      )}
+    <main className="min-h-screen bg-[#0f172a] pb-10">
+      {" "}
+      <h1 className="text-4xl font-bold text-white text-center py-10">
+        Cartelera
+      </h1>
+      <TarjetaPelicula datos={peliculasVisibles} />
+      <div className="flex justify-center mt-10">
+        {peliculasVisibles.length < todasLasPelis.length && (
+          <button
+            onClick={cargarMas}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition-all shadow-lg"
+          >
+            Cargar más películas
+          </button>
+        )}
+      </div>
     </main>
   );
 };
