@@ -3,7 +3,7 @@ import ItemPelicula from "../ItemPelicula/ItemPelicula.jsx";
 
 export default function TarjetaPelicula({ datos }) {
   if (!datos?.length) return <p className="text-white text-center p-10">No hay datos para mostrar.</p>;
-
+  datos.shuffle
   return (
     <main className="p-6 md:p-10 bg-fondo-app min-h-screen">
       <header className="mb-10 max-w-7xl mx-auto">
