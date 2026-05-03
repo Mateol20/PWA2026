@@ -53,16 +53,6 @@ npm run preview  # Preview del build
 
 Aplicación React que consume una API de películas con scroll infinito.
 
-# PWA2026
-
-Proyecto de la materia **Programación Web y Aplicaciones** (2026).
-
-## Integrantes
-
-| Nombre            | Legajo  |
-| ----------------- | ------- |
-| Mateo Garcia      | FAI-4226|
-| Ignacio Bonorino  | FAI-4863|
 
 ## Descripción
 
