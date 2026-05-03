@@ -6,8 +6,8 @@ Proyecto de la materia **Programación Web y Aplicaciones** (2026).
 
 | Nombre            | Legajo  |
 | ----------------- | ------- |
-| Mateo Garcia      | FAI-4226|
-| Ignacio Bonorino  | FAI-4863|
+| Mateo Garcia (PM-TP1)     | FAI-4226|
+| Ignacio Bonorino (PM-TP2) | FAI-4863|
 
 ## Estructura del repositorio
 
@@ -53,15 +53,51 @@ npm run preview  # Preview del build
 
 Aplicación React que consume una API de películas con scroll infinito.
 
-**Tech Stack:** React 19, Vite, Tailwind CSS 4, react-infinite-scroll-component
+# PWA2026
+
+Proyecto de la materia **Programación Web y Aplicaciones** (2026).
+
+## Integrantes
+
+| Nombre            | Legajo  |
+| ----------------- | ------- |
+| Mateo Garcia      | FAI-4226|
+| Ignacio Bonorino  | FAI-4863|
+
+## Descripción
+
+Catálogo de películas con scroll infinito que consume una API externa para mostrar un listado de películas con sus detalles.
+
+## Tech Stack
+
+- **React 19** - Librería de UI
+- **Vite** - Bundler y dev server
+- **Tailwind CSS 4** - Framework de estilos
+- **react-infinite-scroll-component** - Scroll infinito
+- **ESLint** - Linter
 
 **Componentes principales:**
 - `TarjetaPelicula` - Card individual de película
 - `ItemPelicula` - Item de listado
 - `Footer` - Footer de la aplicación
 
-**Servicios:**
-- `getAllMovies` - Servicio para obtener películas de la API
+
+
+### getAllMovies
+
+Función que consume la API de películas con soporte de paginación y búsqueda:
+
+```js
+getAllMovies(page, limit, search)
+```
+
+| Parámetro | Tipo     | Descripción                   |
+| --------- | -------- | ----------------------------- |
+| page      | number   | Página a consultar            |
+| limit     | number   | Cantidad de resultados        |
+| search    | string   | Filtro por título (opcional)  |
+
+**API:** `https://69e65c86ce4e908a155f6c79.mockapi.io/api/v1/pelicula`
 
 **Scripts disponibles:**
 ```bash
