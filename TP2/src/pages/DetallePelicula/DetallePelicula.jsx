@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getMovieById } from "../../../services/getMovieById";
+import {BotonDeFavoritos} from "../../Components/BotonDeFavoritos/BotonDeFavoritos";
+// import { ejecutarLogicaFavorito } from './ruta/a/BotonDeFavoritos';
 
 export default function DetallePelicula() {
   const { imdbID } = useParams();
@@ -21,7 +23,8 @@ export default function DetallePelicula() {
   }, [imdbID]);
 
   const esFavorito = (id) => false;
-  const toggleFavorite = (m) => console.log("Toggle favorite", m);
+  // const toggleFavorite = (m) => console.log("Toggle favorite", m);
+  const toggleFavorite = (m) => BotonDeFavoritos(m);
   const t = (key) => key;
 
   if (cargando) {
