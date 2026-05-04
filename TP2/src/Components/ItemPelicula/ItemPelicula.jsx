@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Etiqueta from "../Etiqueta/Etiqueta";
+
 const EstrellaIcono = () => (
   <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" className="mb-0.5">
     <path
@@ -20,6 +22,7 @@ export default function ItemPelicula({ item, index }) {
       setImgSrc("https://placehold.co/400x600?text=Imagen+No+Encontrada");
     }
   };
+  const esPelicula = item.Type === "movie";
 
   return (
     <article 
@@ -41,6 +44,11 @@ export default function ItemPelicula({ item, index }) {
         <h2 className="text-slate-50 font-bold text-lg md:text-xl line-clamp-2 min-h-[3.5rem] leading-tight mb-1 group-hover:text-blue-400 transition-colors">
           {item.Title}
         </h2>
+
+     <div>
+          <Etiqueta tipo={esPelicula ? "pelicula" : item.Type} />
+</div>
+        
         <p className="text-slate-400 font-medium text-sm mb-4">
           Publicado en <span className="text-slate-300">{item.Year}</span>
         </p>
