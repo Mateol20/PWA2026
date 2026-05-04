@@ -1,24 +1,24 @@
-const API_KEY = "4a68574c";
-const BASE_URL = "https://www.omdbapi.com/";
+const CLAVE_API = "4a68574c";
+const URL_BASE = "https://www.omdbapi.com/";
 
-export const getAllMovies = async (page = 1, search = "Batman") => {
+export const getAllMovies = async (pagina = 1, busqueda = "Batman") => {
   try {
-    const url = new URL(BASE_URL);
-    url.searchParams.append("apikey", API_KEY);
-    url.searchParams.append("s", search);
-    url.searchParams.append("page", page.toString());
+    const url = new URL(URL_BASE);
+    url.searchParams.append("apikey", CLAVE_API);
+    url.searchParams.append("s", busqueda);
+    url.searchParams.append("page", pagina.toString());
 
-    const response = await fetch(url);
-    if (!response.ok) throw new Error("Error en la red");
+    const respuesta = await fetch(url);
+    if (!respuesta.ok) throw new Error("Error en la red");
 
-    const data = await response.json();
-    if (data.Response === "True") {
-      return data.Search;
+    const datos = await respuesta.json();
+    if (datos.Response === "True") {
+      return datos.Search;
     }
 
     return [];
   } catch (error) {
-    console.error("Error en getAllMovies:", error);
+    console.error("Error en obtenerTodasLasPeliculas:", error);
     return [];
   }
 };

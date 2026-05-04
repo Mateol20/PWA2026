@@ -1,55 +1,28 @@
-import React from 'react'
-
-import { useState, useEffect } from "react";
-import styles from "../Home/Home.module.css";
-// import { getAllMovies } from "../../../services/getAllMovies";
+import { useFavoritos } from "../../context/ContextoFavoritos";
 import TarjetaPelicula from "../../Components/TarjetaPelicula/TarjetaPelicula";
 
-const guardadasEnFavoritos = (JSON.parse(localStorage.getItem("peliculas")))
-
 const PaginaDeFavoritos = () => {
-  const [todasLasPelis, setTodasLasPelis] = useState([]);
-  const [peliculasVisibles, setPeliculasVisibles] = useState([]);
-  const [pagina, setPagina] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const limitePorPagina = 8;
-  useEffect(() => {
-    const cargarTodo = async () => {
-      setLoading(true);
-      const respuesta = await guardadasEnFavoritos  
-      setTodasLasPelis(respuesta);
-      setPeliculasVisibles(respuesta?.slice(0, limitePorPagina));
-      setLoading(false);
-    };
-    cargarTodo();
-  }, []);
+  const { favoritos, alternarFavorito, esFavorito } = useFavoritos();
 
-  const cargarMas = () => {
-    const nuevaPagina = pagina + 1;
-    const inicio = 0;
-    const fin = nuevaPagina * limitePorPagina;
-
-    setPeliculasVisibles(todasLasPelis?.slice(inicio, fin));
-    setPagina(nuevaPagina);
-  };
+  if (favoritos.length === 0) {
+    return (
+      <div className="min-h-screen bg-[#0f172a] flex flex-col items-center justify-center">
+        <h1 className="text-4xl font-bold text-white mb-4">Favoritos</h1>
+        <p className="text-slate-400 text-lg">No tienes películas favoritas aún.</p>
+      </div>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-[#0f172a] pb-10">
-      {" "}
       <h1 className="text-4xl font-bold text-white text-center py-10">
-        Cartelera
+        Favoritos
       </h1>
-      <TarjetaPelicula datos={peliculasVisibles} />
-      <div className="flex justify-center mt-10">
-        {peliculasVisibles?.length < todasLasPelis?.length && (
-          <button
-            onClick={cargarMas}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition-all shadow-lg"
-          >
-            Cargar más películas
-          </button>
-        )}
-      </div>
+      <TarjetaPelicula
+        datos={favoritos}
+        esFavorito={esFavorito}
+        alternarFavorito={alternarFavorito}
+      />
     </main>
   );
 };

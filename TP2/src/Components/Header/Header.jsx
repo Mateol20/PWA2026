@@ -1,27 +1,77 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import "./Header.css"
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Header.css";
 
- const Header = () => {
-    const navegar = useNavigate();
-    const irAHome=()=>{
-        navegar('/')
-    }
-    const irAFavoritas=()=>{
-        navegar('/favoritas')
-    }
+const Encabezado = () => {
+  const navegar = useNavigate();
+  const [busqueda, setBusqueda] = useState("");
 
-    return (
-    <>
-    <header className="flex justify-between w-full">
-    <div className='h-24 bg-gray-500  flex justify-between w-full p-7'>
-      <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-80 h-10" onClick={irAHome}>Inicio</button>
-      <input type="text" className=" flex w-80 h-10 border border-black" placeholder="   Buscar..."></input>
-      <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-80 h-10" onClick={irAFavoritas}>Fav</button>
-    </div>
+  const irAInicio = () => {
+    navegar("/");
+  };
+
+  const irAFavoritos = () => {
+    navegar("/favoritos");
+  };
+
+  const manejarBusqueda = (e) => {
+    e.preventDefault();
+    if (busqueda.trim()) {
+      navegar(`/?search=${encodeURIComponent(busqueda.trim())}`);
+    } else {
+      navegar("/");
+    }
+  };
+
+  return (
+    <header className="sticky top-0 z-50 w-full">
+      <div className="h-20 bg-slate-900 flex justify-between items-center w-full px-6 py-4 gap-4 border-b border-slate-700">
+        <button
+          className="flex items-center gap-2 text-slate-200 hover:text-blue-400 font-semibold transition-colors"
+          onClick={irAInicio}
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            />
+          </svg>
+          Inicio
+        </button>
+
+        <form onSubmit={manejarBusqueda} className="flex-1 max-w-md">
+          <input
+            type="text"
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+            className="w-full h-10 border border-slate-600 rounded-lg bg-slate-800 text-slate-200 placeholder-slate-400 px-4 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            placeholder="Buscar película..."
+          />
+        </form>
+
+        <button
+          className="flex items-center gap-2 text-slate-200 hover:text-red-400 font-semibold transition-colors"
+          onClick={irAFavoritos}
+        >
+          <svg
+            className="w-6 h-6"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          </svg>
+          Favoritos
+        </button>
+      </div>
     </header>
-    </>
-  )
-}
-export default Header
-  
+  );
+};
+
+export default Encabezado;
