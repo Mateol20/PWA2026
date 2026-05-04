@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Etiqueta from "../Etiqueta/Etiqueta";
+
 const EstrellaIcono = () => (
   <svg
     width="18px"
@@ -30,6 +32,7 @@ export default function ItemPelicula({ item, index }) {
       setImgSrc("https://placehold.co/400x600?text=Imagen+No+Encontrada");
     }
   };
+  const esPelicula = item.Type === "movie";
 
   return (
     <article className="w-80 h-[29rem] bg-[#1e293b] border border-slate-700/50 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.4)] flex flex-col hover:scale-105 transition-all duration-300 hover:border-blue-500/50 group">
@@ -49,6 +52,11 @@ export default function ItemPelicula({ item, index }) {
         <h2 className="text-slate-50 font-bold text-lg md:text-xl line-clamp-2 min-h-[3.5rem] leading-tight mb-1 group-hover:text-blue-400 transition-colors">
           <Link to={`/pelicula/${item.imdbID}`}>{item.Title}</Link>
         </h2>
+
+        <div>
+          <Etiqueta tipo={esPelicula ? "pelicula" : item.Type} />
+        </div>
+
         <p className="text-slate-400 font-medium text-sm mb-4">
           Publicado en <span className="text-slate-300">{item.Year}</span>
         </p>
