@@ -1,12 +1,13 @@
 import React from "react";
-import { createRoot } from "react-dom/client"; // <--- ESTA ES LA LÍNEA CLAVE
+import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
-import "./index.css"; // Aquí es donde vive Tailwind
+import "./index.css";
+import "./context/i18n.js";
 
-const container = document.getElementById("root");
-const root = createRoot(container);
+const contenedor = document.getElementById("root");
+const raiz = createRoot(contenedor);
 
-root.render(
+raiz.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,

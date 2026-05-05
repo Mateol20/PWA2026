@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Etiqueta from "../Etiqueta/Etiqueta";
 
@@ -18,6 +19,7 @@ const EstrellaIcono = () => (
 );
 
 export default function ItemPelicula({ pelicula, indice, esFavorito, alternarFavorito }) {
+  const { t } = useTranslation();
   const [imagenSrc, setImagenSrc] = useState(
     pelicula.Poster !== "N/A"
       ? pelicula.Poster
@@ -76,12 +78,12 @@ export default function ItemPelicula({ pelicula, indice, esFavorito, alternarFav
         </div>
 
         <p className="text-slate-400 font-medium text-sm mb-4">
-          Publicado en <span className="text-slate-300">{pelicula.Year}</span>
+          {t("publicadoEn")} <span className="text-slate-300">{pelicula.Year}</span>
         </p>
         <div className="grid grid-cols-2 justify-between items-center mt-auto border-t border-slate-700/60 pt-4">
           <div className="flex flex-col">
             <span className="text-yellow-500 text-[10px] font-black uppercase tracking-[0.15em] mb-0.5">
-              Rating IMDB
+              {t("rating")}
             </span>
             <div className="text-2xl font-bold flex gap-x-1.5 items-center text-slate-50">
               {pelicula.imdbRating !== "N/A" ? pelicula.imdbRating : "--"}

@@ -1,5 +1,5 @@
 const CLAVE_API = "4a68574c";
-export const getMovieById = async (imdbID) => {
+export const obtenerPeliculaPorId = async (imdbID) => {
   if (!imdbID) return null;
   try {
     const url = `https://www.omdbapi.com/?i=${imdbID.trim()}&apikey=${CLAVE_API}`;
