@@ -1,10 +1,13 @@
 import React from 'react'
+import { useTranslation } from "react-i18next";
 
-function Footer() {
+function PieDePagina() {
+  const { t } = useTranslation();
+
   return (
 <footer className="w-full bg-[#0f172a] text-slate-400 p-10 grid grid-cols-1 md:grid-cols-3 gap-y-8 items-center border-t border-slate-800">
   <aside className="text-center md:text-left">
-    <p className="font-bold text-slate-200 uppercase text-xs tracking-widest mb-1">Grupo 17</p>
+    <p className="font-bold text-slate-200 uppercase text-xs tracking-widest mb-1">{t("grupo")}</p>
     <p className="text-sm">
       Mateo Garcia FAI-4226
       <br />
@@ -13,11 +16,11 @@ function Footer() {
   </aside>
   <div className="text-center">
     <span className="text-slate-200 font-semibold italic text-lg">
-      Gestor personal de películas y series
+      {t("descripcion")}
     </span>
   </div>
   <nav className="flex flex-col items-center md:items-end">
-    <h6 className="footer-title text-slate-300 opacity-50 mb-2">Social</h6>
+    <h6 className="footer-title text-slate-300 opacity-50 mb-2">{t("redes")}</h6>
     <div className="flex gap-4">
       <a href="#" aria-label="Twitter">
             <svg
@@ -58,4 +61,4 @@ function Footer() {
   )
 }
 
-export default Footer
+export default PieDePagina

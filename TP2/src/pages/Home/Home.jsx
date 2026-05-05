@@ -1,49 +1,76 @@
-import { useState, useEffect } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { getAllMovies } from "../../../services/getAllMovies";
+import { useState, useEffect, useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import useInfiniteScroll from "react-infinite-scroll-hook";
+import { obtenerTodasLasPeliculas } from "../../../services/getAllMovies";
 import TarjetaPelicula from "../../Components/TarjetaPelicula/TarjetaPelicula";
+import { useBusqueda } from "../../context/ContextoBusqueda";
 
-const Home = () => {
+const Inicio = () => {
+  const { t } = useTranslation();
+  const { termino } = useBusqueda();
   const [peliculas, setPeliculas] = useState([]);
   const [pagina, setPagina] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const limitePorPagina = 8;
-  const cargarMas = async () => {
-    const nuevas = await getAllMovies(pagina, "Batman");
+  const [hayMas, setHayMas] = useState(true);
+  const [cargando, setCargando] = useState(false);
+  const busquedaPorDefecto = "Batman";
+
+  const cargarMas = useCallback(async () => {
+    if (cargando || !hayMas) return;
+    setCargando(true);
+
+    const textoBusqueda = termino || busquedaPorDefecto;
+    const nuevas = await obtenerTodasLasPeliculas(pagina, textoBusqueda);
+
     if (nuevas.length === 0) {
-      setHasMore(false);
-      return;
+      setHayMas(false);
     }
+
     setPeliculas((prev) => [...prev, ...nuevas]);
     setPagina((prev) => prev + 1);
-  };
+    setCargando(false);
+  }, [pagina, cargando, hayMas, termino]);
+
   useEffect(() => {
-    cargarMas();
+    setPeliculas([]);
+    setPagina(1);
+    setHayMas(true);
+    setCargando(false);
+  }, [termino]);
+
+  useEffect(() => {
+    if (peliculas.length === 0 && !cargando) {
+      cargarMas();
+    }
   }, []);
+
+  useEffect(() => {
+    if (!cargando) {
+      cargarMas();
+    }
+  }, [termino]);
+
+  const [referencia] = useInfiniteScroll({
+    loading: cargando,
+    hasNextPage: hayMas,
+    onLoadMore: cargarMas,
+  });
 
   return (
     <main className="min-h-screen bg-[#0f172a] pb-10">
-      <h1 className="text-4xl font-bold text-white text-center py-10 uppercase tracking-widest">
-        Cartelera
+      <h1 className="text-4xl font-bold text-white text-center py-10">
+        {t("cartelera")}
       </h1>
-
-      <InfiniteScroll
-        dataLength={peliculas.length}
-        next={cargarMas}
-        hasMore={hasMore}
-        loader={
-          <div className="flex justify-center py-10">
-            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
-          </div>
-        }
-        endMessage={
-          <p className="text-slate-500 text-center py-10 font-medium italic">
-            — No hay más películas para mostrar —
-          </p>
-        }
-      >
-        <TarjetaPelicula datos={peliculas} />
-      </InfiniteScroll>
+      <TarjetaPelicula datos={peliculas} />
+      <div className="flex justify-center mt-10" ref={referencia}>
+        {cargando && (
+          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
+        )}
+      </div>
+      {!hayMas && peliculas.length > 0 && (
+        <p className="text-slate-500 text-center py-6 font-medium italic">
+          {t("noHayMas")}
+        </p>
+      )}
     </main>
   );
 };

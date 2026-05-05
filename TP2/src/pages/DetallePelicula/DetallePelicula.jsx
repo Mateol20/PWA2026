@@ -4,21 +4,23 @@ import { getMovieById } from "../../../services/getMovieById";
 import { BotonDeFavoritos } from "../../Components/BotonDeFavoritos/BotonDeFavoritos";
 
 export default function DetallePelicula() {
+  const { t } = useTranslation();
   const { imdbID } = useParams();
   const [pelicula, setPelicula] = useState(null);
   const [cargando, setCargando] = useState(true);
+  const { alternarFavorito, esFavorito } = useFavoritos();
 
   useEffect(() => {
-    const fetchDetalle = async () => {
+    const obtenerDetalle = async () => {
       setCargando(true);
-      const data = await getMovieById(imdbID);
-      if (data) {
-        setPelicula(data);
+      const datos = await obtenerPeliculaPorId(imdbID);
+      if (datos) {
+        setPelicula(datos);
       }
       setCargando(false);
     };
 
-    if (imdbID) fetchDetalle();
+    if (imdbID) obtenerDetalle();
   }, [imdbID]);
 
   const esFavorito = (id) => false;
@@ -30,7 +32,7 @@ export default function DetallePelicula() {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <p className="text-blue-400 animate-pulse font-medium">
-          Cargando película...
+          {t("cargandoPelicula")}
         </p>
       </div>
     );
@@ -39,9 +41,9 @@ export default function DetallePelicula() {
   if (!pelicula) {
     return (
       <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center gap-4">
-        <p className="text-slate-400">No se encontró la película.</p>
+        <p className="text-slate-400">{t("noEncontrada")}</p>
         <Link to="/" className="text-blue-400 hover:underline">
-          Volver al inicio
+          {t("volverInicio")}
         </Link>
       </div>
     );
@@ -67,12 +69,11 @@ export default function DetallePelicula() {
               d="M15 19l-7-7 7-7"
             />
           </svg>
-          Volver al Inicio
+          {t("volverInicio")}
         </Link>
 
         <div className="bg-slate-900 rounded-3xl overflow-hidden shadow-2xl border border-slate-800">
           <div className="md:flex">
-            {/* Poster Section */}
             <div className="md:w-2/5">
               <img
                 src={
@@ -85,14 +86,13 @@ export default function DetallePelicula() {
               />
             </div>
 
-            {/* Content Section */}
             <div className="md:w-3/5 p-8 md:p-10">
               <div className="flex items-start justify-between gap-4 mb-6">
                 <h1 className="text-3xl font-bold text-slate-100">
                   {pelicula.Title}
                 </h1>
                 <button
-                  onClick={() => toggleFavorite(pelicula)}
+                  onClick={() => alternarFavorito(pelicula)}
                   className={`p-2 rounded-full transition-colors ${
                     esFavorito(pelicula.imdbID)
                       ? "text-yellow-400 bg-yellow-400/10 hover:bg-yellow-400/20"
@@ -110,45 +110,43 @@ export default function DetallePelicula() {
               </div>
 
               <div className="space-y-6">
-                {/* Stats Grid */}
                 <div className="grid grid-cols-3 gap-4 text-sm border-b border-slate-800 pb-6">
                   <div>
-                    <span className="text-slate-500 block mb-1">Año</span>
+                    <span className="text-slate-500 block mb-1">{t("año")}</span>
                     <p className="text-slate-200 font-semibold">
                       {pelicula.Year}
                     </p>
                   </div>
                   <div>
-                    <span className="text-slate-500 block mb-1">Género</span>
+                    <span className="text-slate-500 block mb-1">{t("genero")}</span>
                     <p className="text-slate-200 font-semibold">
                       {pelicula.Genre}
                     </p>
                   </div>
                   <div>
-                    <span className="text-slate-500 block mb-1">Rating</span>
+                    <span className="text-slate-500 block mb-1">{t("rating")}</span>
                     <p className="text-yellow-400 font-bold text-lg">
                       {pelicula.imdbRating}
                     </p>
                   </div>
                 </div>
 
-                {/* Movie Details */}
                 <div className="space-y-4">
                   <div>
                     <span className="text-slate-500 font-medium text-sm">
-                      Director
+                      {t("director")}
                     </span>
                     <p className="text-slate-200">{pelicula.Director}</p>
                   </div>
                   <div>
                     <span className="text-slate-500 font-medium text-sm">
-                      Actores
+                      {t("actores")}
                     </span>
                     <p className="text-slate-200">{pelicula.Actors}</p>
                   </div>
                   <div>
                     <span className="text-slate-500 font-medium text-sm">
-                      Sinopsis
+                      {t("sinopsis")}
                     </span>
                     <p className="text-slate-300 leading-relaxed mt-1">
                       {pelicula.Plot}
