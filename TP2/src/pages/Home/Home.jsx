@@ -1,58 +1,49 @@
-import { useState, useEffect, useCallback } from "react";
-import useInfiniteScroll from "react-infinite-scroll-hook";
+import { useState, useEffect } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { getAllMovies } from "../../../services/getAllMovies";
 import TarjetaPelicula from "../../Components/TarjetaPelicula/TarjetaPelicula";
 
-const Inicio = () => {
+const Home = () => {
   const [peliculas, setPeliculas] = useState([]);
   const [pagina, setPagina] = useState(1);
-  const [hayMas, setHayMas] = useState(true);
-  const [cargando, setCargando] = useState(false);
-  const busqueda = "Batman";
-
-  const cargarMas = useCallback(async () => {
-    if (cargando || !hayMas) return;
-    setCargando(true);
-
-    const nuevas = await getAllMovies(pagina, busqueda);
-
+  const [hasMore, setHasMore] = useState(true);
+  const limitePorPagina = 8;
+  const cargarMas = async () => {
+    const nuevas = await getAllMovies(pagina, "Batman");
     if (nuevas.length === 0) {
-      setHayMas(false);
+      setHasMore(false);
+      return;
     }
-
     setPeliculas((prev) => [...prev, ...nuevas]);
     setPagina((prev) => prev + 1);
-    setCargando(false);
-  }, [pagina, cargando, hayMas]);
-
+  };
   useEffect(() => {
-    if (peliculas.length === 0) {
-      cargarMas();
-    }
+    cargarMas();
   }, []);
-
-  const [referencia] = useInfiniteScroll({
-    loading: cargando,
-    hasNextPage: hayMas,
-    onLoadMore: cargarMas,
-  });
 
   return (
     <main className="min-h-screen bg-[#0f172a] pb-10">
-      <h1 className="text-4xl font-bold text-white text-center py-10">
+      <h1 className="text-4xl font-bold text-white text-center py-10 uppercase tracking-widest">
         Cartelera
       </h1>
-      <TarjetaPelicula datos={peliculas} />
-      <div className="flex justify-center mt-10" ref={referencia}>
-        {cargando && (
-          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
-        )}
-      </div>
-      {!hayMas && peliculas.length > 0 && (
-        <p className="text-slate-500 text-center py-6 font-medium italic">
-          No hay más películas para mostrar.
-        </p>
-      )}
+
+      <InfiniteScroll
+        dataLength={peliculas.length}
+        next={cargarMas}
+        hasMore={hasMore}
+        loader={
+          <div className="flex justify-center py-10">
+            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
+          </div>
+        }
+        endMessage={
+          <p className="text-slate-500 text-center py-10 font-medium italic">
+            — No hay más películas para mostrar —
+          </p>
+        }
+      >
+        <TarjetaPelicula datos={peliculas} />
+      </InfiniteScroll>
     </main>
   );
 };
