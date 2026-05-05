@@ -1,5 +1,6 @@
 import React from "react";
 import ItemPelicula from "../ItemPelicula/ItemPelicula.jsx";
+import { useFavoritos } from "../../context/ContextoFavoritos.jsx";
 
 export default function TarjetaPelicula({ datos }) {
   if (!datos?.length) return null;

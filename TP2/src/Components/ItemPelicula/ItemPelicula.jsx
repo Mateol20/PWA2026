@@ -17,48 +17,66 @@ const EstrellaIcono = () => (
   </svg>
 );
 
-export default function ItemPelicula({ item, index }) {
-  const [imgSrc, setImgSrc] = useState(
-    item.Poster !== "N/A"
-      ? item.Poster
-      : item.Images?.[0] ||
-          "https://placehold.co/400x600?text=Poster+No+Disponible",
+export default function ItemPelicula({ pelicula, indice, esFavorito, alternarFavorito }) {
+  const [imagenSrc, setImagenSrc] = useState(
+    pelicula.Poster !== "N/A"
+      ? pelicula.Poster
+      : pelicula.Images?.[0] ||
+          "https://placehold.co/400x600?text=Poster+No+Disponible"
   );
 
   const manejarErrorImagen = () => {
-    if (imgSrc === item.Poster && item.Images?.[0]) {
-      setImgSrc(item.Images[0]);
+    if (imagenSrc === pelicula.Poster && pelicula.Images?.[0]) {
+      setImagenSrc(pelicula.Images[0]);
     } else {
-      setImgSrc("https://placehold.co/400x600?text=Imagen+No+Encontrada");
+      setImagenSrc("https://placehold.co/400x600?text=Imagen+No+Encontrada");
     }
   };
-  const esPelicula = item.Type === "movie";
+
+  const tipoPelicula = pelicula.Type === "movie";
+  const favorito = esFavorito ? esFavorito(pelicula.imdbID) : false;
 
   return (
-    <article className="w-80 h-[29rem] bg-[#1e293b] border border-slate-700/50 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.4)] flex flex-col hover:scale-105 transition-all duration-300 hover:border-blue-500/50 group">
-      {/* Contenedor de la Imagen */}
+    <article className="w-80 h-[29rem] bg-[#1e293b] border border-slate-700/50 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.4)] flex flex-col hover:scale-105 transition-all duration-300 hover:border-blue-500/50 group relative">
       <div className="h-72 w-full overflow-hidden bg-black relative">
         <img
           className="w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100"
-          src={imgSrc}
-          alt={item.Title}
+          src={imagenSrc}
+          alt={pelicula.Title}
           onError={manejarErrorImagen}
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#1e293b] via-transparent to-transparent opacity-60"></div>
+        {alternarFavorito && (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              alternarFavorito(pelicula);
+            }}
+            className={`absolute top-3 right-3 p-2 rounded-full transition-all z-20 ${
+              favorito
+                ? "text-yellow-400 bg-yellow-400/20 hover:bg-yellow-400/30"
+                : "text-slate-400 bg-slate-900/60 hover:bg-slate-900/80"
+            }`}
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+          </button>
+        )}
       </div>
-      {/* Contenido de Texto */}
       <div className="px-5 py-5 flex flex-col flex-grow bg-[#1e293b] z-10">
         <h2 className="text-slate-50 font-bold text-lg md:text-xl line-clamp-2 min-h-[3.5rem] leading-tight mb-1 group-hover:text-blue-400 transition-colors">
-          <Link to={`/pelicula/${item.imdbID}`}>{item.Title}</Link>
+          <Link to={`/pelicula/${pelicula.imdbID}`}>{pelicula.Title}</Link>
         </h2>
 
         <div>
-          <Etiqueta tipo={esPelicula ? "pelicula" : item.Type} />
+          <Etiqueta tipo={tipoPelicula ? "pelicula" : pelicula.Type} />
         </div>
 
         <p className="text-slate-400 font-medium text-sm mb-4">
-          Publicado en <span className="text-slate-300">{item.Year}</span>
+          Publicado en <span className="text-slate-300">{pelicula.Year}</span>
         </p>
         <div className="grid grid-cols-2 justify-between items-center mt-auto border-t border-slate-700/60 pt-4">
           <div className="flex flex-col">
@@ -66,13 +84,13 @@ export default function ItemPelicula({ item, index }) {
               Rating IMDB
             </span>
             <div className="text-2xl font-bold flex gap-x-1.5 items-center text-slate-50">
-              {item.imdbRating !== "N/A" ? item.imdbRating : "--"}
+              {pelicula.imdbRating !== "N/A" ? pelicula.imdbRating : "--"}
               <EstrellaIcono />
             </div>
           </div>
 
           <span className="text-3xl justify-self-end font-bold text-blue-500/20 italic group-hover:text-blue-500/60 transition-all">
-            #{index + 1}
+            #{indice + 1}
           </span>
         </div>
       </div>
