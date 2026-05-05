@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { obtenerPeliculaPorId } from "../../../services/getMovieById";
-import { useFavoritos } from "../../context/ContextoFavoritos";
+import { getMovieById } from "../../../services/getMovieById";
+import { BotonDeFavoritos } from "../../Components/BotonDeFavoritos/BotonDeFavoritos";
 
 export default function DetallePelicula() {
   const { t } = useTranslation();
@@ -23,6 +22,11 @@ export default function DetallePelicula() {
 
     if (imdbID) obtenerDetalle();
   }, [imdbID]);
+
+  const esFavorito = (id) => false;
+
+  const toggleFavorite = (m) => BotonDeFavoritos(m);
+  const t = (key) => key;
 
   if (cargando) {
     return (

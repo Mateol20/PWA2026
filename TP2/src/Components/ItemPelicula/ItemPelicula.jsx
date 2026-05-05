@@ -19,7 +19,6 @@ const EstrellaIcono = () => (
 );
 
 export default function ItemPelicula({ pelicula, indice, esFavorito, alternarFavorito }) {
-  const { t } = useTranslation();
   const [imagenSrc, setImagenSrc] = useState(
     pelicula.Poster !== "N/A"
       ? pelicula.Poster
@@ -78,7 +77,7 @@ export default function ItemPelicula({ pelicula, indice, esFavorito, alternarFav
         </div>
 
         <p className="text-slate-400 font-medium text-sm mb-4">
-          {t("publicadoEn")} <span className="text-slate-300">{pelicula.Year}</span>
+          Publicado en <span className="text-slate-300">{pelicula.Year}</span>
         </p>
         <div className="grid grid-cols-2 justify-between items-center mt-auto border-t border-slate-700/60 pt-4">
           <div className="flex flex-col">

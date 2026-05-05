@@ -1,6 +1,5 @@
 import { BrowserRouter as Enrutador, Routes, Route } from "react-router-dom";
 import { ProveedorFavoritos } from "./context/ContextoFavoritos";
-import { ProveedorBusqueda } from "./context/ContextoBusqueda";
 import Inicio from "./pages/Home/Home";
 import "./App.css";
 import Encabezado from "./Components/Header/Header";
@@ -12,15 +11,13 @@ function App() {
   return (
     <Enrutador>
       <ProveedorFavoritos>
-        <ProveedorBusqueda>
-          <Encabezado />
-          <Routes>
-            <Route path="/" element={<Inicio />} />
-            <Route path="/pelicula/:imdbID" element={<DetallePelicula />} />
-            <Route path="/favoritos" element={<PaginaDeFavoritos />} />
-          </Routes>
-          <PieDePagina />
-        </ProveedorBusqueda>
+        <Encabezado />
+        <Routes>
+          <Route path="/" element={<Inicio />} />
+          <Route path="/pelicula/:imdbID" element={<DetallePelicula />} />
+          <Route path="/favoritos" element={<PaginaDeFavoritos />} />
+        </Routes>
+        <PieDePagina />
       </ProveedorFavoritos>
     </Enrutador>
   );
