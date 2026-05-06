@@ -1,16 +1,73 @@
-# React + Vite
+# TP2 - Gestor de Películas (OMDb API)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web de página única (SPA) desarrollada en React que permite buscar, visualizar y gestionar películas utilizando la API de OMDb. Incluye scroll infinito, traducción a español/inglés, y gestión de favoritos persistente.
 
-Currently, two official plugins are available:
+**Desarrollado por:**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Mateo Garcia (FAI-4226)
+- Ignacio Bonorino (FAI-4863)
 
-## React Compiler
+## Características
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- ♾️ **Scroll infinito**: Carga automática de resultados usando `react-infinite-scroll-hook`.
+- ❤️ **Favoritos globales**: Sincronización instantánea entre vistas con persistencia en `localStorage`.
+- 🌐 **Multi-idioma**: Soporte para Español e Inglés (`i18next`).
+- 📱 **Responsive**: Diseño adaptable con Tailwind CSS.
 
-## Expanding the ESLint configuration
+## Tecnologías
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React 19 + Vite
+- Tailwind CSS
+- React Router DOM
+- i18next
+- react-infinite-scroll-hook
+- OMDb API
+
+## Instalación
+
+1. **Clonar el repositorio**:
+
+   ```bash
+   git clone <URL_DEL_REPO>
+   cd TP2
+   ```
+
+2. **Instalar dependencias**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Iniciar servidor de desarrollo**:
+   ```bash
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+   npm run dev
+   ```
+   La aplicación estará disponible en `http://localhost:5173`.
+
+## Estructura del Proyecto
+
+```
+TP2/
+├── services/
+│   ├── getAllMovies.js          # Función para obtener lista de películas
+│   └── getMovieById.js          # Función para obtener detalle de una película
+├── src/
+│   ├── Components/
+│   │   ├── Header/              # Barra de navegación y búsqueda
+│   │   ├── Footer/              # Pie de página
+│   │   ├── TarjetaPelicula/     # Grid contenedor de películas
+│   │   └── ItemPelicula/        # Tarjeta individual de película
+│   ├── context/
+│   │   ├── ContextoFavoritos.jsx # Estado global de favoritos
+│   │   ├── ContextoBusqueda.jsx  # Estado global de búsqueda
+│   │   ├── i18n.js               # Configuración de idiomas
+│   │   └── locales/              # Archivos JSON (es.json, en.json)
+│   ├── pages/
+│   │   ├── Home/                 # Página principal con scroll infinito
+│   │   ├── DetallePelicula/      # Vista de información detallada
+│   │   └── Favoritos/            # Lista de películas guardadas
+│   ├── App.jsx                   # Rutas y configuración principal
+│   └── main.jsx                  # Punto de entrada
+└── README.md
+```
