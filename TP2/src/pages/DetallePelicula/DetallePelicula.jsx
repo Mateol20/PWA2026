@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getMovieById } from "../../../services/getMovieById";
-import { BotonDeFavoritos } from "../../Components/BotonDeFavoritos/BotonDeFavoritos";
+import { useTranslation } from "react-i18next";
+import { useFavoritos } from "../../context/ContextoFavoritos";
+import { obtenerPeliculaPorId } from "../../../services/getMovieById";
+import ItemPelicula from "../../Components/ItemPelicula/ItemPelicula";
 
 export default function DetallePelicula() {
   const { t } = useTranslation();
@@ -23,10 +25,7 @@ export default function DetallePelicula() {
     if (imdbID) obtenerDetalle();
   }, [imdbID]);
 
-  const esFavorito = (id) => false;
-
-  const toggleFavorite = (m) => BotonDeFavoritos(m);
-  const t = (key) => key;
+  const toggleFavorite = (m) => alternarFavorito(m);
 
   if (cargando) {
     return (
@@ -112,19 +111,25 @@ export default function DetallePelicula() {
               <div className="space-y-6">
                 <div className="grid grid-cols-3 gap-4 text-sm border-b border-slate-800 pb-6">
                   <div>
-                    <span className="text-slate-500 block mb-1">{t("año")}</span>
+                    <span className="text-slate-500 block mb-1">
+                      {t("año")}
+                    </span>
                     <p className="text-slate-200 font-semibold">
                       {pelicula.Year}
                     </p>
                   </div>
                   <div>
-                    <span className="text-slate-500 block mb-1">{t("genero")}</span>
+                    <span className="text-slate-500 block mb-1">
+                      {t("genero")}
+                    </span>
                     <p className="text-slate-200 font-semibold">
                       {pelicula.Genre}
                     </p>
                   </div>
                   <div>
-                    <span className="text-slate-500 block mb-1">{t("rating")}</span>
+                    <span className="text-slate-500 block mb-1">
+                      {t("rating")}
+                    </span>
                     <p className="text-yellow-400 font-bold text-lg">
                       {pelicula.imdbRating}
                     </p>
