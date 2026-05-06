@@ -49,119 +49,76 @@ npm run lint     # Ejecutar linter
 npm run preview  # Preview del build
 ```
 
-### TP2 - Catálogo de Películas con API
+# TP2 - Gestor de Películas (OMDb API)
 
-Aplicación React que consume una API de películas con scroll infinito.
+Aplicación web de página única (SPA) desarrollada en React que permite buscar, visualizar y gestionar películas utilizando la API de OMDb. Incluye scroll infinito, traducción a español/inglés, y gestión de favoritos persistente.
 
+**Desarrollado por:**
 
-## Descripción
+- Mateo Garcia (FAI-4226)
+- Ignacio Bonorino (FAI-4863)
 
-Catálogo de películas con scroll infinito que consume una API externa para mostrar un listado de películas con sus detalles.
+## Características
 
-## Tech Stack
+- ♾️ **Scroll infinito**: Carga automática de resultados usando `react-infinite-scroll-hook`.
+- ❤️ **Favoritos globales**: Sincronización instantánea entre vistas con persistencia en `localStorage`.
+- 🌐 **Multi-idioma**: Soporte para Español e Inglés (`i18next`).
+- 📱 **Responsive**: Diseño adaptable con Tailwind CSS.
 
-- **React 19** - Librería de UI
-- **Vite** - Bundler y dev server
-- **Tailwind CSS 4** - Framework de estilos
-- **react-infinite-scroll-component** - Scroll infinito
-- **ESLint** - Linter
+## Tecnologías
 
-**Componentes principales:**
-- `TarjetaPelicula` - Card individual de película
-- `ItemPelicula` - Item de listado
-- `Footer` - Footer de la aplicación
+- React 19 + Vite
+- Tailwind CSS
+- React Router DOM
+- i18next
+- react-infinite-scroll-hook
+- OMDb API
 
+## Instalación
 
+1. **Clonar el repositorio**:
 
-### getAllMovies
-
-Función que consume la API de películas con soporte de paginación y búsqueda:
-
-```js
-getAllMovies(page, limit, search)
-```
-
-| Parámetro | Tipo     | Descripción                   |
-| --------- | -------- | ----------------------------- |
-| page      | number   | Página a consultar            |
-| limit     | number   | Cantidad de resultados        |
-| search    | string   | Filtro por título (opcional)  |
-
-**API:** `https://69e65c86ce4e908a155f6c79.mockapi.io/api/v1/pelicula`
-
-**Scripts disponibles:**
-```bash
-cd TP2
-npm run dev      # Iniciar servidor de desarrollo
-npm run build    # Build de producción
-npm run lint     # Ejecutar linter
-npm run preview  # Preview del build
-```
-
-## Guía de instalación
-
-### Requisitos previos
-- [Node.js](https://nodejs.org/) (v18 o superior)
-- [Git](https://git-scm.com/)
-
-### Paso a paso
-
-1. **Clonar el repositorio**
    ```bash
-   git clone https://github.com/Mateol20/PWA2026.git
-   ```
-
-2. **Abrir la carpeta del proyecto**
-   ```bash
-   cd PWA2026
-   ```
-
-3. **Instalar dependencias del TP que desees ejecutar**
-   ```bash
-   # Para TP1
-   cd TP1
-   npm install
-
-   # Para TP2
+   git clone <URL_DEL_REPO>
    cd TP2
+   ```
+
+2. **Instalar dependencias**:
+
+   ```bash
    npm install
    ```
 
-4. **Crear una branch de trabajo**
+3. **Iniciar servidor de desarrollo**:
    ```bash
-   git checkout -b nombre-de-tu-rama
-   ```
-
-5. **Ejecutar el proyecto**
-   ```bash
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
    npm run dev
    ```
+   La aplicación estará disponible en `http://localhost:5173`.
 
-## Flujo de trabajo con Git
+## Estructura del Proyecto
 
-1. **Crear y cambiar a una nueva rama**
-   ```bash
-   git checkout -b nombre-de-tu-rama
-   ```
-
-2. **Verificar rama actual**
-   ```bash
-   git branch
-   ```
-
-3. **Agregar cambios**
-   ```bash
-   git add .
-   ```
-
-4. **Commitear con mensaje descriptivo**
-   ```bash
-   git commit -m "Descripción clara de los cambios realizados"
-   ```
-
-5. **Subir la rama a GitHub**
-   ```bash
-   git push origin nombre-de-tu-rama
-   ```
-
-6. **Crear un Pull Request** desde la web de GitHub
+```
+TP2/
+├── services/
+│   ├── getAllMovies.js          # Función para obtener lista de películas
+│   └── getMovieById.js          # Función para obtener detalle de una película
+├── src/
+│   ├── Components/
+│   │   ├── Header/              # Barra de navegación y búsqueda
+│   │   ├── Footer/              # Pie de página
+│   │   ├── TarjetaPelicula/     # Grid contenedor de películas
+│   │   └── ItemPelicula/        # Tarjeta individual de película
+│   ├── context/
+│   │   ├── ContextoFavoritos.jsx # Estado global de favoritos
+│   │   ├── ContextoBusqueda.jsx  # Estado global de búsqueda
+│   │   ├── i18n.js               # Configuración de idiomas
+│   │   └── locales/              # Archivos JSON (es.json, en.json)
+│   ├── pages/
+│   │   ├── Home/                 # Página principal con scroll infinito
+│   │   ├── DetallePelicula/      # Vista de información detallada
+│   │   └── Favoritos/            # Lista de películas guardadas
+│   ├── App.jsx                   # Rutas y configuración principal
+│   └── main.jsx                  # Punto de entrada
+└── README.md
+```
