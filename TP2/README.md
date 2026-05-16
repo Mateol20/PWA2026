@@ -22,6 +22,10 @@ Aplicación web de página única (SPA) desarrollada en React que permite buscar
 - i18next
 - react-infinite-scroll-hook
 - OMDb API
+- Vitest
+- React Testing Library
+- jest-dom
+- user-event
 
 ## Instalación
 
@@ -44,6 +48,47 @@ Aplicación web de página única (SPA) desarrollada en React que permite buscar
    npm run dev
    ```
    La aplicación estará disponible en `http://localhost:5173`.
+
+## Testing
+
+El proyecto incluye tests automáticos utilizando **Vitest** y **React Testing Library**.
+
+### Librerías instaladas para testing
+
+| Librería | Propósito |
+|----------|-----------|
+| `vitest` | Corredor de tests |
+| `@testing-library/react` | Renderizado de componentes en tests |
+| `@testing-library/jest-dom` | Matchers adicionales (toHaveTextContent, toBeInTheDocument, etc.) |
+| `@testing-library/user-event` | Simulación de eventos de usuario |
+| `jsdom` | Entorno de navegador simulado |
+
+### Cómo ejecutar los tests
+
+```bash
+cd TP2
+npm run test        # Ejecutar en modo watch
+npm run test:run    # Ejecutar una sola vez
+```
+
+### Estructura de tests
+
+```
+src/
+├── Components/
+│   ├── Etiqueta/Etiqueta.test.jsx
+│   ├── Header/Header.test.jsx
+│   ├── Footer/Footer.test.jsx
+│   ├── ItemPelicula/ItemPelicula.test.jsx
+│   └── TarjetaPelicula/TarjetaPelicula.test.jsx
+├── pages/
+│   ├── Home/Home.test.jsx
+│   ├── DetallePelicula/DetallePelicula.test.jsx
+│   └── Favoritos/PaginaDeFavoritos.test.jsx
+└── services/
+    ├── obtenerTodasLasPeliculas.test.js
+    └── obtenerPeliculaPorId.test.js
+```
 
 ## Estructura del Proyecto
 

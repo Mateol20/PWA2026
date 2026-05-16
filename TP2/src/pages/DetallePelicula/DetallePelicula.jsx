@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useFavoritos } from "../../context/ContextoFavoritos";
-import { obtenerPeliculaPorId } from "../../../services/getMovieById";
-import ItemPelicula from "../../Components/ItemPelicula/ItemPelicula";
+import { obtenerPeliculaPorId } from "../../services/obtenerPeliculaPorId";
 
 export default function DetallePelicula() {
   const { t } = useTranslation();
@@ -24,8 +23,6 @@ export default function DetallePelicula() {
 
     if (imdbID) obtenerDetalle();
   }, [imdbID]);
-
-  const toggleFavorite = (m) => alternarFavorito(m);
 
   if (cargando) {
     return (
@@ -82,6 +79,7 @@ export default function DetallePelicula() {
                 }
                 alt={pelicula.Title}
                 className="w-full h-full object-cover min-h-[400px]"
+                onError={(e) => { e.target.src = "https://placehold.co/400x600?text=Sin+Poster"; }}
               />
             </div>
 
@@ -123,7 +121,7 @@ export default function DetallePelicula() {
                       {t("genero")}
                     </span>
                     <p className="text-slate-200 font-semibold">
-                      {pelicula.Genre}
+                      {pelicula.Genre || "N/A"}
                     </p>
                   </div>
                   <div>
@@ -147,7 +145,7 @@ export default function DetallePelicula() {
                     <span className="text-slate-500 font-medium text-sm">
                       {t("actores")}
                     </span>
-                    <p className="text-slate-200">{pelicula.Actors}</p>
+                    <p className="text-slate-200">{pelicula.Actors || "N/A"}</p>
                   </div>
                   <div>
                     <span className="text-slate-500 font-medium text-sm">

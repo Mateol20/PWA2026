@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useCallback } from "react";
 
 const ContextoBusqueda = createContext();
 
+/* eslint-disable react-refresh/only-export-components */
 export const useBusqueda = () => {
   const contexto = useContext(ContextoBusqueda);
   if (!contexto) {

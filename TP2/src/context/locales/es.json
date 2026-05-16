@@ -18,6 +18,7 @@
   "descripcion": "Gestor personal de películas y series",
   "redes": "Redes",
   "publicadoEn": "Publicado en",
+  "sinResultados": "No se encontraron películas para esta búsqueda.",
   "cargando": "Cargando...",
   "sinPoster": "Sin Poster",
   "sinImagen": "Imagen No Encontrada"

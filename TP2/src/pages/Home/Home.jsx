@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import useInfiniteScroll from "react-infinite-scroll-hook";
-import { obtenerTodasLasPeliculas } from "../../../services/getAllMovies";
+import { obtenerTodasLasPeliculas } from "../../services/obtenerTodasLasPeliculas";
 import TarjetaPelicula from "../../Components/TarjetaPelicula/TarjetaPelicula";
 import { useBusqueda } from "../../context/ContextoBusqueda";
 
@@ -12,14 +12,35 @@ const Inicio = () => {
   const [pagina, setPagina] = useState(1);
   const [hayMas, setHayMas] = useState(true);
   const [cargando, setCargando] = useState(false);
-  const busquedaPorDefecto = "Batman";
+  const paginaRef = useRef(pagina);
+  const terminoRef = useRef(termino);
+  const paginasCargadas = useRef(new Set());
+
+  useEffect(() => {
+    paginaRef.current = pagina;
+  }, [pagina]);
+
+  useEffect(() => {
+    if (termino !== terminoRef.current) {
+      setPeliculas([]);
+      setPagina(1);
+      setHayMas(true);
+      setCargando(false);
+      paginasCargadas.current = new Set();
+      terminoRef.current = termino;
+    }
+  }, [termino]);
 
   const cargarMas = useCallback(async () => {
     if (cargando || !hayMas) return;
+
+    const pagActual = paginaRef.current;
+    if (paginasCargadas.current.has(pagActual)) return;
+    paginasCargadas.current.add(pagActual);
+
     setCargando(true);
 
-    const textoBusqueda = termino || busquedaPorDefecto;
-    const nuevas = await obtenerTodasLasPeliculas(pagina, textoBusqueda);
+    const nuevas = await obtenerTodasLasPeliculas(pagActual, termino);
 
     if (nuevas.length === 0) {
       setHayMas(false);
@@ -28,26 +49,13 @@ const Inicio = () => {
     setPeliculas((prev) => [...prev, ...nuevas]);
     setPagina((prev) => prev + 1);
     setCargando(false);
-  }, [pagina, cargando, hayMas, termino]);
+  }, [cargando, hayMas, termino]);
 
   useEffect(() => {
-    setPeliculas([]);
-    setPagina(1);
-    setHayMas(true);
-    setCargando(false);
-  }, [termino]);
-
-  useEffect(() => {
-    if (peliculas.length === 0 && !cargando) {
+    if (peliculas.length === 0 && !cargando && hayMas) {
       cargarMas();
     }
-  }, []);
-
-  useEffect(() => {
-    if (!cargando) {
-      cargarMas();
-    }
-  }, [termino]);
+  }, [peliculas.length, cargando, hayMas, cargarMas]);
 
   const [referencia] = useInfiniteScroll({
     loading: cargando,
@@ -56,7 +64,7 @@ const Inicio = () => {
   });
 
   return (
-    <main className="min-h-screen bg-[#0f172a] pb-10">
+    <main className="min-h-screen bg-slate-900 pb-10">
       <h1 className="text-4xl font-bold text-white text-center py-10">
         {t("cartelera")}
       </h1>
@@ -69,6 +77,11 @@ const Inicio = () => {
       {!hayMas && peliculas.length > 0 && (
         <p className="text-slate-500 text-center py-6 font-medium italic">
           {t("noHayMas")}
+        </p>
+      )}
+      {!hayMas && peliculas.length === 0 && termino && (
+        <p className="text-slate-400 text-center py-6 font-medium">
+          {t("sinResultados")}
         </p>
       )}
     </main>
