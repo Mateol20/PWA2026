@@ -1,7 +1,5 @@
 # PWA2026
 
-Proyecto de la materia **Programación Web y Aplicaciones** (2026).
-
 ## Integrantes
 
 | Nombre                    | Legajo   |
