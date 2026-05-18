@@ -71,8 +71,8 @@ El proyecto incluye tests automáticos utilizando **Vitest** y **React Testing L
 
 ### Librerías instaladas para testing
 
-| Librería                      | Propósito |
-| ----------------------------- | --------- |
+| Librería                      | 
+| ----------------------------- | 
 | `vitest`                      |
 | `@testing-library/react`      |
 | `@testing-library/jest-dom`   |
