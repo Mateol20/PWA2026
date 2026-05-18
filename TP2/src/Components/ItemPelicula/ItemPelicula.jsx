@@ -18,8 +18,9 @@ export default function ItemPelicula({ pelicula, indice, esFavorito, alternarFav
   );
 
   const manejarErrorImagen = () => {
-    if (imagenSrc === pelicula.Poster && pelicula.Images?.[0]) {
-      setImagenSrc(pelicula.Images[0]);
+    const imgSiguiente = pelicula.Images?.find((img) => img !== imagenSrc);
+    if (imgSiguiente) {
+      setImagenSrc(imgSiguiente);
     } else {
       setImagenSrc("https://placehold.co/400x600?text=Imagen+No+Encontrada");
     }
@@ -29,8 +30,8 @@ export default function ItemPelicula({ pelicula, indice, esFavorito, alternarFav
   const favorito = esFavorito ? esFavorito(pelicula.imdbID) : false;
 
   return (
-    <article className="w-80 h-[29rem] bg-[#1e293b] border border-slate-700/50 rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.4)] flex flex-col hover:scale-105 transition-all duration-300 hover:border-blue-500/50 group relative">
-      <div className="h-72 w-full overflow-hidden bg-black relative">
+    <article className="w-full bg-slate-800 border border-slate-700/50 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl flex flex-col hover:scale-[1.03] transition-all duration-300 hover:border-blue-500/50 group relative">
+      <div className="h-44 sm:h-56 md:h-72 w-full overflow-hidden bg-black relative flex-shrink-0">
         <img
           className="w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100"
           src={imagenSrc}
@@ -38,7 +39,7 @@ export default function ItemPelicula({ pelicula, indice, esFavorito, alternarFav
           onError={manejarErrorImagen}
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1e293b] via-transparent to-transparent opacity-60"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-800 via-transparent to-transparent opacity-60"></div>
         {alternarFavorito && (
           <button
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); alternarFavorito(pelicula); }}
@@ -50,23 +51,23 @@ export default function ItemPelicula({ pelicula, indice, esFavorito, alternarFav
           </button>
         )}
       </div>
-      <div className="px-5 py-5 flex flex-col flex-grow bg-[#1e293b] z-10">
-        <h2 className="text-slate-50 font-bold text-lg md:text-xl line-clamp-2 min-h-[3.5rem] leading-tight mb-1 group-hover:text-blue-400 transition-colors">
+      <div className="px-3 py-3 sm:px-5 sm:py-5 flex flex-col flex-1 bg-slate-800 z-10">
+        <h2 className="text-slate-50 font-bold text-xs sm:text-lg md:text-xl line-clamp-2 leading-tight mb-1 group-hover:text-blue-400 transition-colors">
           <Link to={`/pelicula/${pelicula.imdbID}`}>{pelicula.Title}</Link>
         </h2>
         <div><Etiqueta tipo={tipoPelicula ? "pelicula" : pelicula.Type} /></div>
-        <p className="text-slate-400 font-medium text-sm mb-4">
+        <p className="text-slate-400 font-medium text-[11px] sm:text-sm mb-2 sm:mb-4">
           {t("publicadoEn")} <span className="text-slate-300">{pelicula.Year}</span>
         </p>
-        <div className="grid grid-cols-2 justify-between items-center mt-auto border-t border-slate-700/60 pt-4">
+        <div className="grid grid-cols-2 justify-between items-end mt-auto border-t border-slate-700/60 pt-2 sm:pt-4">
           <div className="flex flex-col">
-            <span className="text-yellow-500 text-[10px] font-black uppercase tracking-[0.15em] mb-0.5">{t("rating")}</span>
-            <div className="text-2xl font-bold flex gap-x-1.5 items-center text-slate-50">
+            <span className="text-yellow-500 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.15em] mb-0.5">{t("rating")}</span>
+            <div className="text-base sm:text-2xl font-bold flex gap-x-1 sm:gap-x-1.5 items-center text-slate-50">
               {pelicula.imdbRating !== "N/A" ? pelicula.imdbRating : "--"}
               <EstrellaIcono />
             </div>
           </div>
-          <span className="text-3xl justify-self-end font-bold text-blue-500/20 italic group-hover:text-blue-500/60 transition-all">#{indice + 1}</span>
+          <span className="text-lg sm:text-3xl justify-self-end font-bold text-blue-500/20 italic group-hover:text-blue-500/60 transition-all">#{indice + 1}</span>
         </div>
       </div>
     </article>

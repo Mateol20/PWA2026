@@ -4,7 +4,7 @@ function PieDePagina() {
   const { t } = useTranslation();
 
   return (
-    <footer className="w-full bg-[#0f172a] text-slate-400 p-10 grid grid-cols-1 md:grid-cols-3 gap-y-8 items-center border-t border-slate-800">
+    <footer className="w-full bg-slate-900 text-slate-400 p-10 grid grid-cols-1 md:grid-cols-3 gap-y-8 items-center border-t border-slate-800">
       <aside className="text-center md:text-left">
         <p className="font-bold text-slate-200 uppercase text-xs tracking-widest mb-1">{t("grupo")}</p>
         <p className="text-sm">

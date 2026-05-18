@@ -1,17 +1,13 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
 import ItemPelicula from "../ItemPelicula/ItemPelicula.jsx";
 import { useFavoritos } from "../../context/ContextoFavoritos.jsx";
 
 export default function TarjetaPelicula({ datos }) {
-  const { t } = useTranslation();
   const { alternarFavorito, esFavorito } = useFavoritos();
 
-  if (!datos?.length)
-    return <p className="text-white text-center p-10">{t("cargando")}</p>;
+  if (!datos?.length) return null;
 
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-12 justify-items-center max-w-7xl mx-auto">
+    <section className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-3 gap-y-6 sm:gap-x-6 sm:gap-y-10 justify-items-center max-w-7xl mx-auto px-4 sm:px-6">
       {datos.map((pelicula, indice) => (
         <ItemPelicula
           key={`${pelicula.imdbID}-${indice}`}

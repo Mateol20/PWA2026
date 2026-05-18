@@ -18,6 +18,7 @@
   "descripcion": "Personal movie and series manager",
   "redes": "Social",
   "publicadoEn": "Released in",
+  "sinResultados": "No movies found for this search.",
   "cargando": "Loading...",
   "sinPoster": "No Poster",
   "sinImagen": "Image Not Found"
