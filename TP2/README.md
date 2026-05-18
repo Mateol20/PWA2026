@@ -1,6 +1,6 @@
-# TP2 - Gestor de Películas (OMDb API)
+# TP2 - Gestor de Películas
 
-Aplicación web de página única (SPA) desarrollada en React que permite buscar, visualizar y gestionar películas utilizando la API de OMDb. Incluye scroll infinito, traducción a español/inglés, y gestión de favoritos persistente.
+Aplicación web de página única (SPA) desarrollada en React que permite buscar, visualizar y gestionar películas. Incluye scroll infinito, traducción a español/inglés, y gestión de favoritos persistente.
 
 **Desarrollado por:**
 
@@ -21,19 +21,36 @@ Aplicación web de página única (SPA) desarrollada en React que permite buscar
 - React Router DOM
 - i18next
 - react-infinite-scroll-hook
-- OMDb API
+- MockAPI
 - Vitest
 - React Testing Library
 - jest-dom
 - user-event
+
+## API utilizada
+
+Este proyecto consume una API REST falsa alojada en [MockAPI](https://mockapi.io/), utilizada para simular operaciones CRUD sobre un catálogo de películas.
+
+**URL base:** `https://69e65c86ce4e908a155f6c79.mockapi.io/api/v1/peliculas`
+
+**Endpoints:**
+```
+GET    /peliculas           # Obtener todas las películas
+GET    /peliculas/:id       # Obtener una película por ID
+POST   /peliculas           # Crear una nueva película
+PUT    /peliculas/:id       # Actualizar una película
+DELETE /peliculas/:id       # Eliminar una película
+```
+
+> La URL base se configura en `src/config.js`.
 
 ## Instalación
 
 1. **Clonar el repositorio**:
 
    ```bash
-   git clone <URL_DEL_REPO>
-   cd TP2
+   git clone https://github.com/Mateol20/PWA2026.git
+   cd PWA2026/TP2
    ```
 
 2. **Instalar dependencias**:
@@ -44,7 +61,6 @@ Aplicación web de página única (SPA) desarrollada en React que permite buscar
 
 3. **Iniciar servidor de desarrollo**:
    ```bash
-   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
    npm run dev
    ```
    La aplicación estará disponible en `http://localhost:5173`.
@@ -55,13 +71,13 @@ El proyecto incluye tests automáticos utilizando **Vitest** y **React Testing L
 
 ### Librerías instaladas para testing
 
-| Librería | Propósito |
-|----------|-----------|
-| `vitest` | Corredor de tests |
-| `@testing-library/react` | Renderizado de componentes en tests |
-| `@testing-library/jest-dom` | Matchers adicionales (toHaveTextContent, toBeInTheDocument, etc.) |
-| `@testing-library/user-event` | Simulación de eventos de usuario |
-| `jsdom` | Entorno de navegador simulado |
+| Librería                      | Propósito |
+| ----------------------------- | --------- |
+| `vitest`                      |
+| `@testing-library/react`      |
+| `@testing-library/jest-dom`   |
+| `@testing-library/user-event` |
+| `jsdom`                       |
 
 ### Cómo ejecutar los tests
 
@@ -69,6 +85,7 @@ El proyecto incluye tests automáticos utilizando **Vitest** y **React Testing L
 cd TP2
 npm run test        # Ejecutar en modo watch
 npm run test:run    # Ejecutar una sola vez
+npm run "nombre del test.jsx" # Ejecutar un test en especifico
 ```
 
 ### Estructura de tests
